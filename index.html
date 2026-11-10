@@ -6,15 +6,15 @@
   <title>《K33p_1t_s1mpl3》軟體設計文件 (SDD) 專題報告</title>
   <style>
     :root {
-      --bg-color: #121417;
-      --card-bg: #1c2026;
-      --border-color: #2e3440;
-      --accent-color: #d8dee9;
-      --accent-dim: rgba(216, 222, 233, 0.08);
-      --highlight-color: #88c0d0;
-      --text-main: #e5e9f0;
-      --text-muted: #9bbfca;
-      --text-dim: #6c7a89;
+      --bg-color: #f4f4f7;
+      --card-bg: #ffffff;
+      --border-color: #dcdce6;
+      --border-focus: #4b6bfb;
+      --text-main: #1e2025;
+      --text-muted: #575e6e;
+      --text-dim: #8a909e;
+      --highlight-color: #2b56f5;
+      --tag-bg: #eef2ff;
       --font-mono: "SF Mono", "Cascadia Code", "Consolas", monospace;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
@@ -43,7 +43,7 @@
       align-items: center;
       padding: 14px 32px;
       border-bottom: 1px solid var(--border-color);
-      background-color: #171a1f;
+      background-color: #ffffff;
       z-index: 10;
     }
 
@@ -59,8 +59,9 @@
     }
 
     .brand .tag-label {
-      background: var(--border-color);
+      background: var(--tag-bg);
       color: var(--highlight-color);
+      border: 1px solid #c7d2fe;
       padding: 2px 8px;
       border-radius: 4px;
       font-size: 0.75rem;
@@ -75,7 +76,7 @@
     }
 
     .btn {
-      background: var(--card-bg);
+      background: #ffffff;
       border: 1px solid var(--border-color);
       color: var(--text-main);
       padding: 6px 14px;
@@ -83,12 +84,13 @@
       cursor: pointer;
       font-family: var(--font-mono);
       font-size: 0.82rem;
-      transition: background 0.15s ease, border-color 0.15s ease;
+      transition: all 0.15s ease;
     }
 
     .btn:hover:not(:disabled) {
       border-color: var(--highlight-color);
-      background: #232830;
+      color: var(--highlight-color);
+      background: var(--tag-bg);
     }
 
     .btn:disabled {
@@ -107,7 +109,7 @@
       flex: 1;
       position: relative;
       width: 100%;
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 30px 40px;
       display: flex;
@@ -126,7 +128,7 @@
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 36px 44px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       overflow-y: auto;
     }
 
@@ -147,7 +149,7 @@
     .slide-title {
       font-size: 1.65rem;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-main);
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--border-color);
@@ -158,14 +160,14 @@
       text-align: center;
       justify-content: center !important;
       align-items: center;
-      background: #171a1f;
+      background: #ffffff;
     }
 
     .cover-title {
       font-size: 2.8rem;
       font-weight: 800;
       font-family: var(--font-mono);
-      color: #ffffff;
+      color: var(--text-main);
       margin-bottom: 10px;
     }
 
@@ -179,7 +181,7 @@
     .cover-meta {
       display: inline-block;
       text-align: left;
-      background: var(--card-bg);
+      background: #f8f9fc;
       border: 1px solid var(--border-color);
       padding: 20px 30px;
       border-radius: 6px;
@@ -193,6 +195,13 @@
     }
 
     /* Layout Grids */
+    .grid-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -208,7 +217,7 @@
     }
 
     .card {
-      background: #171a1f;
+      background: #fdfdfd;
       border: 1px solid var(--border-color);
       border-radius: 6px;
       padding: 18px 20px;
@@ -237,18 +246,18 @@
 
     th, td {
       border: 1px solid var(--border-color);
-      padding: 8px 12px;
+      padding: 9px 14px;
       text-align: left;
     }
 
     th {
-      background-color: #232830;
+      background-color: #f1f3f9;
       color: var(--text-main);
       font-weight: 600;
     }
 
     tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.01);
+      background-color: #fafbfc;
     }
 
     /* Code Blocks */
@@ -257,18 +266,18 @@
     }
 
     pre {
-      background: #121417;
+      background: #1e2025;
       border: 1px solid var(--border-color);
       border-radius: 4px;
       padding: 12px 16px;
-      color: #88c0d0;
+      color: #e5e9f0;
       overflow-x: auto;
       font-size: 0.84rem;
       line-height: 1.5;
       margin-top: 8px;
     }
 
-    .code-comment { color: var(--text-dim); }
+    .code-comment { color: #8a909e; }
     .code-keyword { color: #81a1c1; }
     .code-str { color: #a3be8c; }
 
@@ -281,14 +290,14 @@
       font-size: 0.8rem;
       color: var(--text-dim);
       border-top: 1px solid var(--border-color);
-      background-color: #171a1f;
+      background-color: #ffffff;
       font-family: var(--font-mono);
     }
 
     .progress-bar-container {
       width: 220px;
       height: 4px;
-      background: var(--card-bg);
+      background: var(--bg-color);
       border-radius: 2px;
       overflow: hidden;
       border: 1px solid var(--border-color);
@@ -313,6 +322,14 @@
 
     li strong {
       color: var(--text-main);
+    }
+
+    a {
+      color: var(--highlight-color);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -355,13 +372,13 @@
       
       <div class="grid-2" style="margin-bottom: 14px;">
         <div class="card">
-          <div class="card-title">📌 SRS 需求規格（要做什麼？）</div>
+          <div class="card-title">SRS 需求規格（系統要做什麼？）</div>
           <div class="card-desc">
             定義使用者功能需求（如指令比對、文字打字機、LocalStorage 儲存進度）與外部品質約束（如 0.1s 回應時間、不崩潰防呆機制）。
           </div>
         </div>
         <div class="card">
-          <div class="card-title">🛠️ SDD 設計描述（怎麼實作？）</div>
+          <div class="card-title">SDD 設計描述（程式如何實作？）</div>
           <div class="card-desc">
             將需求拆解為具體的<b>程式模組分工</b>（<code>parser.js</code>, <code>state.js</code>, <code>ui.js</code>）、<b>正規表達式與演算法</b>、以及<b>JSON 資料字典與 Schema 驗證機制</b>。
           </div>
@@ -369,7 +386,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">🎯 技術選擇與架構約束</div>
+        <div class="card-title">技術選擇與架構約束</div>
         <div class="card-desc">
           採用<b>無後端純前端架構 (HTML5 / ES6 JavaScript)</b>，無須安裝伺服器或資料庫即可運作，完全杜絕個資外洩風險（NF-08），並滿足首頁 3 秒內完成載入之指標（NF-07）。
         </div>
@@ -381,7 +398,7 @@
       <div class="slide-badge">第二章 :: 系統分解視圖 (DECOMPOSITION VIEW)</div>
       <h2 class="slide-title">系統模組架構與職責分配</h2>
       <div class="card-desc" style="margin-bottom: 12px;">
-        依據 IEEE 1016 規範將系統解耦為五大高內聚、低耦合之模組：
+        依據 IEEE 1016 規範將系統解耦為五大高內聚、低耦合之模組，並明確劃分程式組職責：
       </div>
       <table>
         <thead>
@@ -389,7 +406,7 @@
             <th>模組名稱</th>
             <th>實作檔案</th>
             <th>核心職責與功能實作</th>
-            <th>主要負責人</th>
+            <th>程式組負責人</th>
           </tr>
         </thead>
         <tbody>
@@ -415,13 +432,13 @@
             <td><strong>錯誤處理模組 (Error Handler)</strong></td>
             <td><code>errorHandler.js</code></td>
             <td>捕捉無效指令與格式錯誤、回傳驚悚文字提示、防範系統崩潰 (F-11, NF-02)</td>
-            <td>王文伶 / 杜汯溱</td>
+            <td>王文伶</td>
           </tr>
           <tr>
             <td><strong>音效控制模組 (Audio)</strong></td>
             <td><code>audio.js</code></td>
-            <td> Web Audio API 音效播放（按鍵音、提示音）、自動播放限制處理</td>
-            <td>杜汯溱</td>
+            <td>Web Audio API 音效播放（按鍵音、提示音）、自動播放限制處理</td>
+            <td>余苡萱</td>
           </tr>
         </tbody>
       </table>
@@ -433,7 +450,7 @@
       <h2 class="slide-title">單次指令處理之資料流程圖</h2>
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">📋 指令執行生命週期</div>
+          <div class="card-title">指令執行生命週期</div>
           <ol>
             <li><strong>玩家輸入：</strong> 玩家於 Terminal 輸入框鍵入指令並按下 Enter。</li>
             <li><strong>傳遞與解析：</strong> <code>ui.js</code> 傳送字串至 <code>parser.js</code> 進行正則分析與清洗。</li>
@@ -443,7 +460,7 @@
           </ol>
         </div>
         <div class="card">
-          <div class="card-title">💻 模組互動架構圖</div>
+          <div class="card-title">模組互動架構圖</div>
           <pre>
 [ 玩家輸入指令 ]
        │
@@ -470,53 +487,53 @@
     <section class="slide" data-index="5">
       <div class="slide-badge">第四章 :: 元件詳細設計 (PARSER)</div>
       <h2 class="slide-title">指令解析邏輯與正則表達式 (parser.js)</h2>
-      <div class="grid-2">
+      <div class="grid-1">
         <div class="card">
-          <div class="card-title">📄 指令語法對照表</div>
+          <div class="card-title">指令語法與需求對照表</div>
           <table>
             <thead>
               <tr>
-                <th>指令格式</th>
-                <th>功能說明</th>
-                <th>需求編號</th>
+                <th style="width: 28%;">指令格式範例</th>
+                <th style="width: 54%;">功能說明與邊界條件</th>
+                <th style="width: 18%;">需求編號</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><code>simple</code></td>
-                <td>獲取當前章節提示</td>
+                <td>獲取當前章節關鍵提示訊息</td>
                 <td>F-02</td>
               </tr>
               <tr>
                 <td><code>list</code></td>
-                <td>列出已解鎖物件與章節</td>
+                <td>列出當前已解鎖之道具、文件與章節資料夾清單</td>
                 <td>F-03</td>
               </tr>
               <tr>
                 <td><code>inspect [target]</code></td>
-                <td>調查特定場景或物品</td>
+                <td>調查特定場景或物品細節（如 <code>inspect note_01</code>）</td>
                 <td>F-04</td>
               </tr>
               <tr>
                 <td><code>05_HO_05</code> / <code>05_HO_123</code></td>
-                <td>章節/地點/人物觸發指令</td>
+                <td>章節/地點/人物劇情觸發指令（多人代號須依小到大排序）</td>
                 <td>F-05</td>
               </tr>
               <tr>
                 <td><code>name [P1~P5] [newName]</code></td>
-                <td>重新命名角色暱稱</td>
+                <td>重新命名角色暱稱（底層 ID 維持固定不變）</td>
                 <td>F-06</td>
               </tr>
               <tr>
                 <td><code>save [slot]</code> / <code>load [slot]</code></td>
-                <td>手動進度存取操作</td>
+                <td>手動儲存或讀取指定槽位之遊戲進度 (1~5 號槽位)</td>
                 <td>F-08</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="card">
-          <div class="card-title">💻 解析器邏輯範例 (Javascript)</div>
+          <div class="card-title">解析器核心程式邏輯</div>
           <pre>
 <span class="code-keyword">function</span> parseCommand(rawInput) {
   <span class="code-keyword">const</span> cleaned = rawInput.trim();
@@ -526,7 +543,7 @@
   <span class="code-keyword">const</span> storyMatch = cleaned.toLowerCase().match(/^(\d{2})_([a-z]{2})_(\d+)$/);
   <span class="code-keyword">if</span> (storyMatch) {
     <span class="code-keyword">const</span> [_, chapter, location, who] = storyMatch;
-    <span class="code-comment">// 驗證多人代號是否嚴格升冪排序</span>
+    <span class="code-comment">// 驗證多人代號是否嚴格升冪排序 (例如 123 合法，321 不合法)</span>
     <span class="code-keyword">if</span> (who.length > 1 && !isAscending(who)) {
       <span class="code-keyword">return</span> { type: <span class="code-str">'INVALID_ORDER'</span> };
     }
@@ -548,13 +565,13 @@
       <div class="grid-2">
         <div>
           <div class="card" style="margin-bottom: 14px;">
-            <div class="card-title">🎭 人格暱稱與代號解耦設計</div>
+            <div class="card-title">人格暱稱與代號解耦設計</div>
             <div class="card-desc">
               系統底層固定維護 5 位人格代號（<code>P1</code> ~ <code>P5</code>），玩家輸入 <code>name P1 自訂名稱</code> 時僅變更 UI 渲染欄位，不會影響底層邏輯與劇情觸發條件（F-06-04）。
             </div>
           </div>
           <div class="card">
-            <div class="card-title">🧩 符文連線序列對照</div>
+            <div class="card-title">符文連線序列對照</div>
             <div class="card-desc">
               第 13 幕解謎機制要求玩家按嚴格順序連線房間：<br>
               <strong>301 (天台) ➔ 204 (命案現場) ➔ 205 (密室) ➔ 103 (診斷室)</strong><br>
@@ -563,7 +580,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-title">💻 狀態分派邏輯 (Javascript)</div>
+          <div class="card-title">狀態分派邏輯</div>
           <pre>
 <span class="code-keyword">function</span> updateGameState(cmd) {
   <span class="code-keyword">switch</span>(cmd.type) {
@@ -592,7 +609,7 @@
       <h2 class="slide-title">LocalStorage 儲存模型與驗證機制</h2>
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">📦 JSON 資料字典欄位</div>
+          <div class="card-title">JSON 資料字典欄位</div>
           <div class="card-desc">
             使用 Key-Value 結構儲存於 Web LocalStorage (F-08-04)：
           </div>
@@ -614,10 +631,10 @@
           </pre>
         </div>
         <div class="card">
-          <div class="card-title">🛡️ 存檔資料防護與防呆設計 (NF-06)</div>
+          <div class="card-title">存檔資料防護與防呆設計 (NF-06)</div>
           <div class="card-desc">
             <ul>
-              <li><strong>Schema 結構校驗：</strong> 讀取存檔時，先檢查欄位完整性，避免因舊版存檔或被人為修改而造成前端程式報錯。</li>
+              <li><strong>Schema 結構校驗：</strong> 讀取存檔時先檢查欄位完整性，避免因舊版存檔或人為修改造成程式報錯。</li>
               <li><strong>容錯還原機制：</strong> 當偵測到存檔 JSON 解析失敗時，自動拒絕讀取並保留當前記憶體狀態，防止系統崩潰。</li>
               <li><strong>無痕模式防護：</strong> 當瀏覽器停用 LocalStorage 時，使用 <code>try...catch</code> 捕獲異常並跳出友善提示，維持遊戲基本運作。</li>
             </ul>
@@ -632,7 +649,7 @@
       <h2 class="slide-title">介面渲染與防呆錯誤處理設計</h2>
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">🖥️ Terminal 控制與打字機效果 (ui.js)</div>
+          <div class="card-title">Terminal 控制與打字機效果 (ui.js)</div>
           <div class="card-desc">
             <ul>
               <li><strong>逐字印出 (F-10-02)：</strong> 採用 <code>requestAnimationFrame</code> 實現平滑打字機動畫。</li>
@@ -642,7 +659,7 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-title">⚠️ 錯誤捕捉與驚悚提示 (errorHandler.js)</div>
+          <div class="card-title">錯誤捕捉與驚悚提示 (errorHandler.js)</div>
           <table>
             <thead>
               <tr>
@@ -757,7 +774,7 @@
       <h2 class="slide-title">SDD 成果總結與後續時程規劃</h2>
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">🏆 SDD 架構設計重點總結</div>
+          <div class="card-title">SDD 架構設計重點總結</div>
           <ul>
             <li><strong>架構權責清晰：</strong> 劃分五大模組，便於小組成員平行分工開發與模組測試。</li>
             <li><strong>系統品質保障：</strong> 實現 0.1s 解析回應與 100% 全域例外攔截機制。</li>
@@ -765,7 +782,7 @@
           </ul>
         </div>
         <div class="card">
-          <div class="card-title">📅 專案進度里程碑 (PEP)</div>
+          <div class="card-title">專案進度里程碑 (PEP)</div>
           <ul>
             <li><strong>W1 - W4：</strong> 專案計畫書 (PEP) 完成 ✅</li>
             <li><strong>W5 - W7：</strong> 需求規格書 (SRS) 定案 ✅</li>
@@ -777,20 +794,28 @@
       </div>
     </section>
 
-    <!-- Slide 11: References -->
+    <!-- Slide 11: References & Verification -->
     <section class="slide" data-index="11">
-      <div class="slide-badge">附錄 :: 參考資料</div>
-      <h2 class="slide-title">參考文獻 (References)</h2>
-      <div class="card" style="line-height: 2; margin-top: 20px;">
+      <div class="slide-badge">附錄 :: 參考文獻與專案驗證</div>
+      <h2 class="slide-title">參考文獻與專案驗證連結 (References)</h2>
+      <div class="card" style="line-height: 1.9; margin-top: 10px;">
+        <div class="card-title" style="margin-bottom: 6px;">📚 標準與團隊文件出處</div>
         <ol>
           <li>輔仁大學人工智慧與資訊安全學士學位學程第九組（2026）。《K33p_1t_s1mpl3》軟體設計文件 (SDD)。</li>
           <li>輔仁大學人工智慧與資訊安全學士學位學程第九組（2026）。《K33p_1t_s1mpl3》系統需求規格書 (SRS)。</li>
-          <li>輔仁大學人工智慧與資訊安全學士學位學程第九組（2026）。《K33p_1t_s1mpl3》專案執行計畫書 (PEP)。</li>
           <li>IEEE Computer Society (1998). <i>IEEE Std 1016-1998, Recommended Practice for Software Design Descriptions</i>.</li>
-          <li>IEEE Computer Society (2009). <i>IEEE Std 1016-2009, Standard for Information Technology -- Systems Design -- Software Design Descriptions</i>.</li>
         </ol>
       </div>
-      <div style="margin-top: 30px; text-align: center; color: var(--highlight-color); font-family: var(--font-mono); font-size: 0.95rem;">
+
+      <div class="card" style="line-height: 1.9; margin-top: 14px;">
+        <div class="card-title" style="margin-bottom: 6px;">🔗 實作程式碼與線上遊戲驗證 (GitHub)</div>
+        <ul>
+          <li><strong>GitHub 專案庫 (Repository)：</strong> <a href="https://github.com/k33p1ts1mpl3/K33p_1t_s1mpl3" target="_blank">github.com/k33p1ts1mpl3/K33p_1t_s1mpl3</a></li>
+          <li><strong>GitHub Pages 線上展示：</strong> <a href="https://k33p1ts1mpl3.github.io/K33p_1t_s1mpl3/" target="_blank">k33p1ts1mpl3.github.io/K33p_1t_s1mpl3/</a></li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 20px; text-align: center; color: var(--highlight-color); font-family: var(--font-mono); font-size: 0.95rem;">
         // 報告完畢，感謝聆聽 //
       </div>
     </section>
@@ -799,7 +824,7 @@
 
   <!-- Footer -->
   <footer>
-    <div>第九組專題報告 :: 輔仁大學人工智慧與資訊安全學名學程</div>
+    <div>第九組專題報告 :: 輔仁大學人工智慧與資訊安全學學程</div>
     <div class="progress-bar-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
