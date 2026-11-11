@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>《K33p_1t_s1mpl3》SDD_報告 </title>
+  <title>《K33p_1t_S1mpl3》SDD 報告</title>
   <style>
     :root {
       --bg-color: #f4f4f7;
       --card-bg: #ffffff;
       --border-color: #cbd5e1;
-      --border-focus: #2563eb;
-      --text-main: #0f172a;       /* 純深黑 */
-      --text-muted: #1e293b;      /* 清析黑灰（取消所有淺灰） */
-      --text-dim: #334155;        /* 濃郁深黑 */
+      --text-main: #0f172a;
+      --text-muted: #1e293b;
       --highlight-color: #1d4ed8;
       --tag-bg: #eff6ff;
       --font-mono: "SF Mono", "Cascadia Code", "Consolas", monospace;
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
     * {
@@ -26,318 +24,323 @@
     }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      overflow: hidden;
       height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
     }
 
-    /* Header Nav */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 40px;
-      border-bottom: 2px solid var(--border-color);
-      background-color: #ffffff;
+    header, footer {
       z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 32px;
+      background: #fff;
+      font-family: var(--font-mono);
     }
 
-    .brand {
+    header {
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    footer {
+      border-top: 2px solid var(--border-color);
+      font-size: .82rem;
+      font-weight: 600;
+    }
+
+    .brand, .controls {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: var(--text-main);
-      font-weight: 700;
-      letter-spacing: 0.5px;
     }
 
-    .brand .tag-label {
+    .brand {
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .tag-label {
+      padding: 3px 9px;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
       background: var(--tag-bg);
       color: var(--highlight-color);
-      border: 1px solid #bfdbfe;
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
     }
 
     .btn {
-      background: #ffffff;
+      padding: 7px 14px;
       border: 2px solid var(--border-color);
-      color: var(--text-main);
-      padding: 7px 16px;
       border-radius: 6px;
+      background: #fff;
+      color: var(--text-main);
       cursor: pointer;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
       font-weight: 700;
-      transition: all 0.15s ease;
     }
 
     .btn:hover:not(:disabled) {
       border-color: var(--highlight-color);
-      color: var(--highlight-color);
       background: var(--tag-bg);
+      color: var(--highlight-color);
     }
 
     .btn:disabled {
-      opacity: 0.3;
+      opacity: .35;
       cursor: not-allowed;
     }
 
     .page-indicator {
-      color: var(--text-main);
-      font-weight: 700;
-      min-width: 60px;
+      min-width: 70px;
       text-align: center;
+      font-weight: 700;
     }
 
-    /* Slide Container (寬度拓寬為 1400px) */
     main {
-      flex: 1;
       position: relative;
+      flex: 1;
       width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 24px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      max-width: 1500px;
+      margin: auto;
+      padding: 20px 28px;
       overflow: hidden;
     }
 
     .slide {
       position: absolute;
-      top: 20px; bottom: 20px; left: 30px; right: 30px;
+      inset: 20px 28px;
       display: none;
       flex-direction: column;
-      justify-content: flex-start;
-      background: var(--card-bg);
+      padding: 30px 38px;
+      overflow-y: auto;
       border: 2px solid var(--border-color);
       border-radius: 10px;
-      padding: 36px 48px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      overflow-y: auto;
+      background: var(--card-bg);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
     }
 
     .slide.active {
       display: flex;
     }
 
-    /* Slide Typography */
-    .slide-badge {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      color: var(--highlight-color);
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .slide-title {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--border-color);
-    }
-
-    /* Cover Slide Styling */
     .cover-slide {
-      text-align: center;
-      justify-content: center !important;
       align-items: center;
-      background: #ffffff;
+      justify-content: center;
+      text-align: center;
     }
 
     .cover-title {
-      font-size: 3rem;
-      font-weight: 900;
+      margin-bottom: 10px;
       font-family: var(--font-mono);
-      color: var(--text-main);
-      margin-bottom: 12px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
     }
 
     .cover-subtitle {
-      font-size: 1.25rem;
+      margin-bottom: 26px;
       color: var(--text-muted);
-      margin-bottom: 30px;
+      font-size: 1.25rem;
       font-weight: 600;
     }
 
     .cover-meta {
-      display: inline-block;
-      text-align: left;
-      background: #f8fafc;
+      padding: 20px 30px;
       border: 2px solid var(--border-color);
-      padding: 22px 34px;
       border-radius: 8px;
-      font-size: 0.95rem;
-      line-height: 1.9;
-      color: var(--text-muted);
+      background: #f8fafc;
+      text-align: left;
+      line-height: 2;
     }
 
-    .cover-meta strong {
-      color: var(--text-main);
+    .slide-badge {
+      margin-bottom: 5px;
+      color: var(--highlight-color);
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
-    /* Layout Grids */
-    .grid-1 {
+    .slide-title {
+      margin-bottom: 16px;
+      padding-bottom: 9px;
+      border-bottom: 2px solid var(--border-color);
+      font-size: 1.55rem;
+      font-weight: 800;
+    }
+
+    .grid-2, .grid-3 {
       display: grid;
-      grid-template-columns: 1fr;
       gap: 16px;
       margin-top: 10px;
     }
 
     .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-top: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .card {
-      background: #ffffff;
+      padding: 17px 20px;
       border: 2px solid var(--border-color);
       border-radius: 8px;
-      padding: 20px 24px;
+      background: #fff;
     }
 
     .card-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--highlight-color);
       margin-bottom: 8px;
+      color: var(--highlight-color);
+      font-size: 1rem;
+      font-weight: 800;
     }
 
-    .card-desc {
-      font-size: 0.94rem;
+    .card-desc, p, li {
       color: var(--text-muted);
-      line-height: 1.65;
+      font-size: .92rem;
     }
 
-    /* Tables */
+    p + p {
+      margin-top: 8px;
+    }
+
+    ul, ol {
+      padding-left: 21px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
     table {
       width: 100%;
+      margin-top: 8px;
       border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 0.92rem;
+      font-size: .86rem;
     }
 
     th, td {
+      padding: 8px 10px;
       border: 1px solid var(--border-color);
-      padding: 10px 16px;
       text-align: left;
-      color: var(--text-main);
+      vertical-align: top;
     }
 
     th {
-      background-color: #f1f5f9;
-      color: var(--text-main);
-      font-weight: 700;
+      background: #f1f5f9;
+      font-weight: 800;
     }
 
     tr:nth-child(even) {
-      background-color: #f8fafc;
+      background: #f8fafc;
     }
 
-    /* Code Blocks */
     pre, code {
       font-family: var(--font-mono);
     }
 
-    pre {
-      background: #0f172a;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 14px 18px;
-      color: #f8fafc;
-      overflow-x: auto;
-      font-size: 0.86rem;
-      line-height: 1.5;
-      margin-top: 8px;
+    code {
+      padding: 1px 4px;
+      border-radius: 3px;
+      background: #f1f5f9;
+      color: #172554;
+      overflow-wrap: anywhere;
     }
 
-    .code-comment { color: #94a3b8; }
-    .code-keyword { color: #38bdf8; }
-    .code-str { color: #4ade80; }
+    pre {
+      margin-top: 8px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      border-radius: 6px;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: .8rem;
+      line-height: 1.5;
+      white-space: pre;
+    }
 
-    /* Footer */
-    footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 40px;
-      font-size: 0.85rem;
-      color: var(--text-main);
-      border-top: 2px solid var(--border-color);
-      background-color: #ffffff;
-      font-family: var(--font-mono);
-      font-weight: 600;
+    .note {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--highlight-color);
+      background: var(--tag-bg);
+      color: var(--text-muted);
+      font-size: .88rem;
     }
 
     .progress-bar-container {
-      width: 260px;
-      height: 6px;
-      background: var(--bg-color);
-      border-radius: 3px;
+      width: 220px;
+      height: 7px;
       overflow: hidden;
       border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--bg-color);
     }
 
     .progress-bar {
+      width: 0;
       height: 100%;
-      width: 0%;
       background: var(--highlight-color);
-      transition: width 0.2s ease;
-    }
-
-    ul, ol {
-      padding-left: 22px;
-      color: var(--text-muted);
-      font-size: 0.94rem;
-    }
-
-    li {
-      margin-bottom: 6px;
-    }
-
-    li strong {
-      color: var(--text-main);
+      transition: width .2s ease;
     }
 
     a {
       color: var(--highlight-color);
       font-weight: 700;
-      text-decoration: underline;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 800px) {
+      header, footer {
+        padding: 10px 14px;
+      }
+
+      .brand {
+        font-size: .75rem;
+      }
+
+      .controls {
+        gap: 5px;
+      }
+
+      .btn {
+        padding: 6px 8px;
+        font-size: .75rem;
+      }
+
+      main {
+        padding: 10px;
+      }
+
+      .slide {
+        inset: 10px;
+        padding: 22px 18px;
+      }
+
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        font-size: .68rem;
+      }
+
+      .progress-bar-container {
+        width: 90px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header Nav -->
   <header>
     <div class="brand">
       <span class="tag-label">SDD</span>
@@ -350,629 +353,469 @@
     </div>
   </header>
 
-  <!-- Main Slides -->
   <main>
-
-    <!-- Slide 1: Cover -->
+    <!-- Slide 1 -->
     <section class="slide cover-slide active" data-index="1">
       <h1 class="cover-title">K33p_1t_s1mpl3</h1>
-      <div class="cover-subtitle">SDD 報告</div>
+      <div class="cover-subtitle">Software Design Document｜軟體設計文件</div>
       <div class="cover-meta">
-        <div><strong>專案組別：</strong> 第九組</div>
-        <div><strong>團隊成員：</strong> 王文伶、杜汯溱、余苡萱、吳千心、王瑀彤</div>
-        <div><strong>指導教授：</strong> 杜海倫 教授</div>
+        <div><strong>專案名稱：</strong>Game_with_no_name_rn_XDD</div>
+        <div><strong>專案組別：</strong>第九組</div>
+        <div><strong>團隊成員：</strong>王文伶、杜汯溱、余苡萱、吳千心、王瑀彤</div>
+        <div><strong>指導教授：</strong>杜海倫 教授</div>
+        <div><strong>文件性質：</strong>系統設計企畫</div>
       </div>
     </section>
 
-    <!-- Slide 2: 系統簡介 and 文件目的與範圍 and 專有名詞 -->
+    <!-- Slide 2 -->
     <section class="slide" data-index="2">
-      <h2 class="slide-title"> 系統概述與目的（Introduction）</h2>
-      
-      <div class="grid-2" style="margin-bottom: 14px;">
+      <div class="slide-badge">第一章 :: INTRODUCTION</div>
+      <h2 class="slide-title">系統概述與目的</h2>
+
+      <div class="grid-2">
         <div class="card">
           <div class="card-title">系統簡介</div>
           <div class="card-desc">
             <ul>
-               <li>以<b>瀏覽器為平台</b>的<b>指令式</b>文字冒險與解謎遊戲</li>
-               <li>閱讀信件與故事文件、調查劇情物件，並逐步探索遊戲內容</li>
-               <li>黑白主題、文字動畫及音效，營造沉浸式的閱讀與探索體驗</li>
+              <li>以瀏覽器為平台的指令式文字冒險與解謎遊戲。</li>
+              <li>玩家輸入指令，閱讀信件與故事文件，並調查劇情物件。</li>
+              <li>使用黑白主題、文字動畫及音效營造探索氛圍。</li>
+            </ul>
           </div>
         </div>
+
         <div class="card">
-          <div class="card-title">目的與範圍</div>
+          <div class="card-title">文件目的與範圍</div>
           <div class="card-desc">
-            說明系統的整體架構、主要模組、操作流程、介面與資料設計，涵蓋遊戲前端、指令處理、故事內容、解鎖列表、玩家設定、音效動畫、存檔與讀檔。
+            本文件說明系統架構、主要模組、操作流程、介面與資料設計，供專案成員、開發人員及測試人員參考。
+            目前已有的功能與未來規劃會分開說明；完整存檔、讀檔及後端服務屬於未來規劃。
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" style="margin-top:16px">
         <div class="card-title">專有名詞</div>
-        <div class="card-desc">
-          CLIㅤㅤㅤㅤㅤㅤㅤ命令列介面；玩家輸入文字指令的操作方式。<br>
-          SPAㅤㅤㅤㅤㅤㅤㅤ單頁式應用程式；遊戲在同一個網頁中切換不同畫面。<br>
-          Viewㅤㅤㅤㅤㅤㅤ遊戲中的畫面，例如終端機、故事文件或解鎖列表。<br>
-          解鎖項目ㅤㅤㅤㅤ玩家進入或發現後，會記錄在探索列表中的內容。<br>
-          localStorageㅤㅤ瀏覽器本機儲存功能，目前用於保存部分玩家資料。<br>
-          存檔／讀檔ㅤㅤㅤ玩家保存及載入遊戲進度。<br>
+        <table>
+          <thead>
+            <tr><th>名詞</th><th>說明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>CLI</td><td>命令列介面；玩家輸入文字指令的操作方式。</td></tr>
+            <tr><td>SPA</td><td>單頁式應用程式；遊戲在同一網頁中切換不同畫面。</td></tr>
+            <tr><td>View</td><td>遊戲畫面，例如終端機、故事文件或解鎖列表。</td></tr>
+            <tr><td>解鎖項目</td><td>玩家進入或發現後，記錄於探索列表中的內容。</td></tr>
+            <tr><td>localStorage</td><td>瀏覽器本機儲存功能，目前用於保存部分玩家資料。</td></tr>
+            <tr><td>匿名識別 Cookie</td><td>未來可用來辨識同一瀏覽器的匿名玩家，不代表真實身分驗證。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide" data-index="3">
+      <div class="slide-badge">第二章 :: SYSTEM ARCHITECTURE</div>
+      <h2 class="slide-title">系統架構與技術棧</h2>
+
+      <div class="note">
+        現況：遊戲為瀏覽器端前端應用，部分資料存於 localStorage。以下後端 API、Cookie 與資料庫為未來規劃，尚未實作。
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">目標架構（後端為規劃功能）</div>
+          <pre>玩家
+ │ 輸入指令、點擊按鈕、閱讀內容
+ ▼
+React 遊戲介面
+ ├─ 畫面與導覽
+ ├─ 指令處理
+ ├─ 故事與物件互動
+ └─ 解鎖進度管理
+          │ HTTPS / REST API
+          ▼
+後端 API（Node.js + Express）
+ ├─ 建立匿名玩家識別
+ ├─ 接收與驗證進度資料
+ └─ 讀取或更新存檔
+          │
+          ▼
+PostgreSQL 資料庫
+（未來保存匿名玩家進度）</pre>
+          <p>靜態網站主機提供前端檔案；後端 API 與資料庫需另外部署。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">技術棧</div>
+          <table>
+            <thead><tr><th>項目</th><th>技術／狀態</th></tr></thead>
+            <tbody>
+              <tr><td>程式語言</td><td>TypeScript、HTML、CSS（現有）</td></tr>
+              <tr><td>前端框架</td><td>React（現有）</td></tr>
+              <tr><td>建置工具</td><td>Vite（現有）</td></tr>
+              <tr><td>UI 樣式</td><td>CSS、Tailwind CSS（現有）</td></tr>
+              <tr><td>本機資料保存</td><td>localStorage（現有）</td></tr>
+              <tr><td>音效</td><td>瀏覽器 Audio API（現有）</td></tr>
+              <tr><td>後端</td><td>Node.js、Express、TypeScript（規劃）</td></tr>
+              <tr><td>資料庫</td><td>PostgreSQL（規劃）</td></tr>
+              <tr><td>前後端通訊</td><td>HTTPS REST API（規劃）</td></tr>
+              <tr><td>玩家識別</td><td>匿名 Cookie（規劃，非登入驗證）</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- 架構說明、模組劃分 and 技術棧 -->
-    <section class="slide" data-index="3">
-      <h2 class="slide-title">系統架構設計（System Architecture）</h2>
-      <div class="card-desc" style="margin-bottom: 12px;">
-        系統目前採用瀏覽器端前端架構，使用 React 建立畫面，TypeScript 撰寫程式，Vite 負責開發與建置。遊戲主要邏輯在瀏覽器內執行，部分設定與解鎖資料使用 localStorage 保存。目前沒有後端伺服器或資料庫。
-      </div>
-               <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; margin: 16px 0;">
-          
-            <!-- 左側獨立 Card：架構說明 -->
-            <div class="card" style="flex: 1; min-width: 340px; margin: 0; display: flex; flex-direction: column;">
-              <div class="card-title">架構說明</div>
-              <div style="flex: 1; background-color: #0d1522; color: #f8f9fa; border-radius: 8px; padding: 24px; margin-top: 16px; display: flex; align-items: center;">
-                <pre style="margin: 0; height: auto; max-height: none; overflow-x: auto; font-size: 15px; line-height: 1.5; background: transparent; color: inherit; border: none; padding: 0;">
-            玩家
-             │ 輸入指令、點擊按鈕、閱讀內容
-             ▼
-            React 遊戲介面
-             ├─ 畫面與導覽
-             ├─ 指令處理
-             ├─ 故事與物件互動
-             ├─ 解鎖進度管理
-             └─ 主題、動畫與音效
-                      │
-                      │ HTTPS / REST API
-                      ▼
-                後端 API 伺服器
-                ├─ 驗證玩家身分
-                ├─ 接收與檢查遊戲進度
-                └─ 讀取或更新存檔
-                      │
-                      ▼
-                   資料庫
-                （保存玩家帳號、
-                  存檔與遊戲進度）
-                </pre>
-              </div>
-            </div>
-          
-            <!-- 右側獨立 Card：使用技術 -->
-            <div class="card" style="flex: 1.3; min-width: 380px; margin: 0;">
-              <div class="card-title">技術棧</div>
-              <table style="width: 100%; border-collapse: collapse; margin: 16px 0 0 0; font-size: 16px;">
-                <thead>
-                  <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; text-align: left;">
-                    <th style="padding: 12px 16px; width: 32%;">項目</th>
-                    <th style="padding: 12px 16px;">使用技術</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">程式語言</td>
-                    <td style="padding: 12px 16px;">TypeScript、HTML、CSS</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">前端框架</td>
-                    <td style="padding: 12px 16px;">React</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">建置工具</td>
-                    <td style="padding: 12px 16px;">Vite</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">UI 樣式</td>
-                    <td style="padding: 12px 16px;">CSS、Tailwind CSS</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">本機資料保存</td>
-                    <td style="padding: 12px 16px;">
-                      <code style="background-color: #f1f3f5; color: #212529; padding: 2px 6px; border-radius: 4px; font-family: monospace;">localStorage</code></td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">音效</td>
-                    <td style="padding: 12px 16px;">瀏覽器 Audio API</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">後端執行環境</td>
-                    <td style="padding: 12px 16px;">Node.js</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">後端框架</td>
-                    <td style="padding: 12px 16px;">Express</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">後端程式語言</td>
-                    <td style="padding: 12px 16px;">TypeScript</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">資料庫</td>
-                    <td style="padding: 12px 16px;">PostgreSQL</td>
-                  </tr>
-                  <tr style="border-bottom: 1px solid #dee2e6;">
-                    <td style="padding: 12px 16px; font-weight: bold;">前後端通訊</td>
-                    <td style="padding: 12px 16px;">HTTPS REST API</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 12px 16px; font-weight: bold;">玩家識別</td>
-                    <td style="padding: 12px 16px;">匿名識別 Cookie</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          
-          </div>
+    <!-- Slide 4 -->
+    <section class="slide" data-index="4">
+      <div class="slide-badge">第二章 :: MODULE DESIGN</div>
+      <h2 class="slide-title">模組劃分與互動關係</h2>
 
       <div class="card">
-      <div class="card-title">模組劃分</div>
-                  <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 16px;">
-            <thead>
-              <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6; text-align: left;">
-                <th style="padding: 12px 16px; width: 25%;">模組</th>
-                <th style="padding: 12px 16px;">功能</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">遊戲介面與導覽</td>
-                <td style="padding: 12px 16px;">顯示終端機、信件、故事文件、調查頁及列表；處理頁面切換與返回。</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">指令處理</td>
-                <td style="padding: 12px 16px;">解析玩家輸入，執行主題切換、命名、頁面導覽及物件調查。</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">故事內容</td>
-                <td style="padding: 12px 16px;">顯示信件、章節文件、彩蛋及互動物件內容。</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">解鎖列表</td>
-                <td style="padding: 12px 16px;">記錄已開啟的內容，並依類別顯示。</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">玩家設定</td>
-                <td style="padding: 12px 16px;">管理玩家名稱、角色名稱與資料夾顯示名稱。</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">音效與動畫</td>
-                <td style="padding: 12px 16px;">播放打字、雨聲、敲門聲等效果。</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 12px 16px; font-weight: bold;">存檔與讀檔</td>
-                <td style="padding: 12px 16px;">保存完整進度、載入存檔及提供存檔槽。</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="card-title">主要模組</div>
+        <table>
+          <thead>
+            <tr><th>模組</th><th>主要責任</th><th>狀態</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>遊戲介面與導覽</td><td>顯示終端機、信件、故事文件、調查頁與列表，處理畫面切換。</td><td>已實作</td></tr>
+            <tr><td>指令處理</td><td>解析玩家輸入，執行主題切換、命名、頁面導覽及物件調查。</td><td>已實作於 App.tsx</td></tr>
+            <tr><td>故事內容</td><td>呈現 README、HELP_67、01_GR_1、彩蛋及調查內容。</td><td>部分實作，可擴充</td></tr>
+            <tr><td>解鎖與列表</td><td>記錄已解鎖項目，依類別顯示於 list 頁面。</td><td>已實作</td></tr>
+            <tr><td>玩家設定</td><td>管理玩家名稱、角色名稱與資料夾顯示名稱。</td><td>已實作</td></tr>
+            <tr><td>動畫與音效</td><td>處理開場動畫、信件逐字效果、主題及故事音效。</td><td>已實作</td></tr>
+            <tr><td>存檔與讀檔</td><td>保存、載入完整進度及管理存檔槽。</td><td>未來規劃</td></tr>
+            <tr><td>後端資料服務</td><td>提供玩家識別、進度 API 與資料庫存取。</td><td>未來規劃</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">現有程式結構說明</div>
+        <p>目前主要遊戲邏輯與畫面集中在 <code>src/App.tsx</code>，入口為 <code>src/main.tsx</code>，樣式包含於 <code>src/index.css</code> 與元件內樣式。未來可再拆分指令、故事資料、存檔與畫面元件。</p>
       </div>
     </section>
 
-    <!-- Slide 4: Dataflow Model -->
-    <section class="slide" data-index="4">
-      <div class="slide-badge">第三章 :: 相依視圖 (DEPENDENCY VIEW)</div>
-      <h2 class="slide-title">單次指令處理之資料流程圖</h2>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title">指令執行生命週期</div>
-          <ol>
-            <li><strong>玩家輸入：</strong> 玩家於 Terminal 輸入框鍵入指令並按下 Enter。</li>
-            <li><strong>傳遞與解析：</strong> <code>ui.js</code> 傳送字串至 <code>parser.js</code> 進行正則分析與清洗。</li>
-            <li><strong>狀態更新：</strong> 若語法正確，由 <code>state.js</code> 變更遊戲狀態並寫入 LocalStorage。</li>
-            <li><strong>錯誤轉向：</strong> 若語法錯誤，轉交 <code>errorHandler.js</code> 產生錯誤訊息。</li>
-            <li><strong>介面輸出：</strong> <code>ui.js</code> 啟動打字機效果印出結果，並由 <code>audio.js</code> 觸發音效。</li>
-          </ol>
-        </div>
-        <div class="card">
-          <div class="card-title">模組互動架構圖</div>
-          <pre>
-[ 玩家輸入指令 ]
-       │
-       ▼
-┌──────────────┐      無效指令      ┌────────────────┐
-│  parser.js   │ ─────────────────► │errorHandler.js │
-└──────┬───────┘                    └───────┬────────┘
-       │ {type, args}                       │
-       ▼                                    │ 提示訊息
-┌──────────────┐                            │
-│   state.js   │ ◄──────────────────────────┘
-└──────┬───────┘
-       │ 更新 State / 自動存檔
-       ▼
-┌──────────────┐      音效觸發      ┌────────────────┐
-│    ui.js     │ ─────────────────► │    audio.js    │
-└──────────────┘                    └────────────────┘
-          </pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 5: Parser Design -->
+    <!-- Slide 5 -->
     <section class="slide" data-index="5">
-      <div class="slide-badge">第四章 :: 元件詳細設計 (PARSER)</div>
-      <h2 class="slide-title">指令解析邏輯與正則表達式 (parser.js)</h2>
-      <div class="grid-1">
+      <div class="slide-badge">第三章 :: COMMAND DESIGN</div>
+      <h2 class="slide-title">指令介面與處理設計</h2>
+
+      <div class="grid-2">
         <div class="card">
-          <div class="card-title">指令語法與需求對照表</div>
+          <div class="card-title">目前主要指令</div>
           <table>
-            <thead>
-              <tr>
-                <th style="width: 25%;">指令格式範例</th>
-                <th style="width: 60%;">功能說明與邊界條件</th>
-                <th style="width: 15%;">需求編號</th>
-              </tr>
-            </thead>
+            <thead><tr><th>指令</th><th>功能</th></tr></thead>
             <tbody>
-              <tr>
-                <td><code>simple</code></td>
-                <td>獲取當前章節關鍵提示訊息</td>
-                <td>F-02</td>
-              </tr>
-              <tr>
-                <td><code>list</code></td>
-                <td>列出當前已解鎖之道具、文件與章節資料夾清單</td>
-                <td>F-03</td>
-              </tr>
-              <tr>
-                <td><code>inspect [target]</code></td>
-                <td>調查特定場景或物品細節（如 <code>inspect note_01</code>）</td>
-                <td>F-04</td>
-              </tr>
-              <tr>
-                <td><code>05_HO_05</code> / <code>05_HO_123</code></td>
-                <td>章節/地點/人物劇情觸發指令（多人代號須依小到大排序）</td>
-                <td>F-05</td>
-              </tr>
-              <tr>
-                <td><code>name [P1~P5] [newName]</code></td>
-                <td>重新命名角色暱稱（底層 ID 維持固定不變）</td>
-                <td>F-06</td>
-              </tr>
-              <tr>
-                <td><code>save [slot]</code> / <code>load [slot]</code></td>
-                <td>手動儲存或讀取指定槽位之遊戲進度 (1~5 號槽位)</td>
-                <td>F-08</td>
-              </tr>
+              <tr><td><code>simple</code></td><td>開啟說明信件。</td></tr>
+              <tr><td><code>01_GR_1</code></td><td>開啟故事文件。</td></tr>
+              <tr><td><code>HELP_67</code></td><td>開啟 HELP_67 文件。</td></tr>
+              <tr><td><code>inspect_ri</code></td><td>開啟山脊旅店調查內容。</td></tr>
+              <tr><td><code>inspect_sh</code></td><td>開啟 Shiminaseo 調查內容。</td></tr>
+              <tr><td><code>list</code></td><td>查看已解鎖內容。</td></tr>
+              <tr><td><code>theme</code>、<code>black</code>、<code>white</code></td><td>切換或指定黑白主題。</td></tr>
+              <tr><td><code>name</code>、<code>6</code>、<code>7</code></td><td>變更玩家或角色名稱。</td></tr>
+              <tr><td><code>title</code>／<code>tittle</code></td><td>自訂列表中的資料夾名稱。</td></tr>
+              <tr><td><code>back</code>、<code>exit</code>、Esc</td><td>返回終端機或前一畫面。</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="card">
-          <div class="card-title">解析器核心程式邏輯</div>
-          <pre>
-<span class="code-keyword">function</span> parseCommand(rawInput) {
-  <span class="code-keyword">const</span> cleaned = rawInput.trim();
-  <span class="code-keyword">if</span> (!cleaned) <span class="code-keyword">return</span> { type: <span class="code-str">'EMPTY'</span> };
-  
-  <span class="code-comment">// 比對劇情複合指令 (例如 05_ho_123)</span>
-  <span class="code-keyword">const</span> storyMatch = cleaned.toLowerCase().match(/^(\d{2})_([a-z]{2})_(\d+)$/);
-  <span class="code-keyword">if</span> (storyMatch) {
-    <span class="code-keyword">const</span> [_, chapter, location, who] = storyMatch;
-    <span class="code-comment">// 驗證多人代號是否嚴格升冪排序 (例如 123 合法，321 不合法)</span>
-    <span class="code-keyword">if</span> (who.length > 1 && !isAscending(who)) {
-      <span class="code-keyword">return</span> { type: <span class="code-str">'INVALID_ORDER'</span> };
-    }
-    <span class="code-keyword">return</span> { type: <span class="code-str">'STORY'</span>, args: { chapter, location, who } };
-  }
 
-  <span class="code-keyword">const</span> tokens = cleaned.split(/\s+/);
-  <span class="code-keyword">return</span> dispatchStandardCommand(tokens);
-}
-          </pre>
+        <div class="card">
+          <div class="card-title">指令處理流程</div>
+          <ol>
+            <li>玩家於終端機或列表頁輸入指令。</li>
+            <li>系統清除前後空白並辨識指令名稱與參數。</li>
+            <li>依指令更新畫面、名稱、主題或解鎖狀態。</li>
+            <li>需要保存的部分資料寫入 localStorage。</li>
+            <li>若指令無效或格式錯誤，顯示提示訊息。</li>
+          </ol>
+          <div class="note">
+            完整的 <code>save</code>／<code>load</code> 指令目前尚未實作；若未來加入，需連接本機存檔或後端 API。
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 6: State Machine Design -->
+    <!-- Slide 6 -->
     <section class="slide" data-index="6">
-      <div class="slide-badge">第四章 :: 元件詳細設計 (STATE)</div>
-      <h2 class="slide-title">狀態機邏輯與解謎演算法 (state.js)</h2>
-      <div class="grid-2">
-        <div>
-          <div class="card" style="margin-bottom: 14px;">
-            <div class="card-title">人格暱稱與代號解耦設計</div>
-            <div class="card-desc">
-              系統底層固定維護 5 位人格代號（<code>P1</code> ~ <code>P5</code>），玩家輸入 <code>name P1 自訂名稱</code> 時僅變更 UI 渲染欄位，不會影響底層邏輯與劇情觸發條件（F-06-04）。
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-title">符文連線序列對照</div>
-            <div class="card-desc">
-              第 13 幕解謎機制要求玩家按嚴格順序連線房間：<br>
-              <strong>301 (天台) ➔ 204 (命案現場) ➔ 205 (密室) ➔ 103 (診斷室)</strong><br>
-              若順序不符則陣列自動重置，避免玩家暴力列舉突破。
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">狀態分派邏輯</div>
-          <pre>
-<span class="code-keyword">function</span> updateGameState(cmd) {
-  <span class="code-keyword">switch</span>(cmd.type) {
-    <span class="code-keyword">case</span> <span class="code-str">'STORY'</span>:
-      <span class="code-keyword">if</span> (!canTrigger(cmd.args)) <span class="code-keyword">return</span> ErrorHandler.trigger(<span class="code-str">'NOT_READY'</span>);
-      GameState.currentChapter = cmd.args.chapter;
-      GameState.currentLocation = cmd.args.location;
-      advanceStoryNode();
-      <span class="code-keyword">break</span>;
+      <div class="slide-badge">第三章 :: STATE & NAVIGATION</div>
+      <h2 class="slide-title">畫面狀態與操作流程</h2>
 
-    <span class="code-keyword">case</span> <span class="code-str">'RENAME'</span>:
-      GameState.names[cmd.args.target] = cmd.args.newName;
-      <span class="code-keyword">break</span>;
-  }
-  <span class="code-comment">// 每次有效指令皆自動觸發 LocalStorage 寫入</span>
-  autoSaveToLocalStorage();
-}
-          </pre>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">主要畫面狀態</div>
+          <ul>
+            <li><code>terminal</code>：終端機首頁與指令輸入。</li>
+            <li><code>letter</code>：說明信件。</li>
+            <li><code>easter_egg</code>：彩蛋信件頁面。</li>
+            <li><code>doc_01_gr_1</code>：故事文件。</li>
+            <li><code>doc_help_67</code>：HELP_67 文件。</li>
+            <li><code>letter_ridge_lodge</code>：山脊旅店調查內容。</li>
+            <li><code>letter_shiminaseo</code>：Shiminaseo 調查內容。</li>
+            <li><code>list</code>：已解鎖內容列表。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">玩家操作動線</div>
+          <pre>開啟遊戲
+   ↓
+開場文字動畫（可跳過）
+   ↓
+終端機首頁
+   ├─ simple → 說明信件
+   ├─ 01_GR_1 → 故事文件 → 調查物件
+   ├─ HELP_67 → 文件 → 調查物件
+   ├─ list → 已解鎖內容
+   └─ theme／name → 設定變更
+          ↓
+返回按鈕或 Esc</pre>
+          <p>玩家進入特定內容後，系統會將該內容加入已解鎖清單。</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 7: Data Design & LocalStorage -->
+    <!-- Slide 7 -->
     <section class="slide" data-index="7">
-      <div class="slide-badge">第五章 :: 資料庫與資料結構設計 (DATA DESIGN)</div>
-      <h2 class="slide-title">LocalStorage 儲存模型與驗證機制</h2>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title">JSON 資料字典欄位</div>
-          <div class="card-desc">
-            使用 Key-Value 結構儲存於 Web LocalStorage (F-08-04)：
-          </div>
-          <pre>
-{
-  <span class="code-str">"version"</span>: 1,
-  <span class="code-str">"chapter"</span>: <span class="code-str">"05"</span>,
-  <span class="code-str">"location"</span>: <span class="code-str">"HO"</span>,
-  <span class="code-str">"names"</span>: {
-    <span class="code-str">"P1"</span>: <span class="code-str">"Mara"</span>,
-    <span class="code-str">"P5"</span>: <span class="code-str">"Iris"</span>
-  },
-  <span class="code-str">"unlocked"</span>: {
-    <span class="code-str">"objects"</span>: [<span class="code-str">"key_01"</span>, <span class="code-str">"note_02"</span>],
-    <span class="code-str">"chapters"</span>: [<span class="code-str">"01"</span>, <span class="code-str">"02"</span>, <span class="code-str">"03"</span>, <span class="code-str">"04"</span>, <span class="code-str">"05"</span>]
-  },
-  <span class="code-str">"savedAt"</span>: <span class="code-str">"2026-11-08T10:30:00Z"</span>
-}
-          </pre>
-        </div>
-        <div class="card">
-          <div class="card-title">存檔資料防護與防呆設計 (NF-06)</div>
-          <div class="card-desc">
-            <ul>
-              <li><strong>Schema 結構校驗：</strong> 讀取存檔時先檢查欄位完整性，避免因舊版存檔或人為修改造成程式報錯。</li>
-              <li><strong>容錯還原機制：</strong> 當偵測到存檔 JSON 解析失敗時，自動拒絕讀取並保留當前記憶體狀態，防止系統崩潰。</li>
-              <li><strong>無痕模式防護：</strong> 當瀏覽器停用 LocalStorage 時，使用 <code>try...catch</code> 捕獲異常並跳出友善提示，維持遊戲基本運作。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+      <div class="slide-badge">第三章 :: DATA DESIGN</div>
+      <h2 class="slide-title">資料保存與未來存檔設計</h2>
 
-    <!-- Slide 8: UI & Error Handling -->
-    <section class="slide" data-index="8">
-      <div class="slide-badge">第四章 :: 元件詳細設計 (UI & ERROR)</div>
-      <h2 class="slide-title">介面渲染與防呆錯誤處理設計</h2>
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">Terminal 控制與打字機效果 (ui.js)</div>
-          <div class="card-desc">
-            <ul>
-              <li><strong>逐字印出 (F-10-02)：</strong> 採用 <code>requestAnimationFrame</code> 實現平滑打字機動畫。</li>
-              <li><strong>跳過機制 (F-10-03)：</strong> 當文字仍在繪製時按下 Space 或 Enter 鍵，即時清除 Timer 並展開全文字。</li>
-              <li><strong>歷史對話框 (F-07)：</strong> 使用獨立面板顯示 log/history，避免主文字區域混亂。</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">錯誤捕捉與驚悚提示 (errorHandler.js)</div>
+          <div class="card-title">目前本機保存資料</div>
           <table>
-            <thead>
-              <tr>
-                <th>錯誤型態</th>
-                <th>系統處理機制與訊息提示</th>
-              </tr>
-            </thead>
+            <thead><tr><th>localStorage Key</th><th>用途</th></tr></thead>
             <tbody>
-              <tr>
-                <td><code>INVALID_CMD</code></td>
-                <td>回傳「黑暗中沒有回應，請檢查輸入指令。」</td>
-              </tr>
-              <tr>
-                <td><code>NO_OBJECT</code></td>
-                <td>回傳「你仔細觀察了四周，並沒有找到該物件。」</td>
-              </tr>
-              <tr>
-                <td><code>ORDER_ERR</code></td>
-                <td>回傳「聲音混亂...多人對話順序必須由小到大。」</td>
-              </tr>
+              <tr><td><code>cli_folder_names</code></td><td>自訂資料夾名稱。</td></tr>
+              <tr><td><code>cli_unlocked_letters</code></td><td>已解鎖的信件與文件項目。</td></tr>
+              <tr><td><code>cli_user_name_v2</code></td><td>玩家名稱。</td></tr>
+              <tr><td><code>cli_name_6</code>、<code>cli_name_7</code></td><td>角色名稱。</td></tr>
+              <tr><td><code>cli_used_names</code></td><td>曾使用過的名稱。</td></tr>
             </tbody>
           </table>
-          <div class="card-desc" style="margin-top: 10px;">
-            全站使用全局 <code>window.onerror</code> 與 <code>try...catch</code> 攔截，<strong>完全不採用瀏覽器原生 <code>alert()</code> 彈窗</strong>，保障遊戲沉浸感。
-          </div>
+          <p class="note">這是部分狀態的本機保存，不等同於完整存檔／讀檔，也無法跨瀏覽器同步。</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">未來雲端存檔概念</div>
+          <pre>SaveData
+├─ version       存檔格式版本
+├─ savedAt       最後保存時間
+├─ playerNames   玩家與角色名稱
+├─ unlockedItems 已解鎖內容
+├─ readChapters  已讀章節
+└─ settings      主題及其他設定</pre>
+          <ol>
+            <li>瀏覽器首次連線時，後端建立匿名識別碼。</li>
+            <li>識別碼以 Cookie 儲存在該瀏覽器。</li>
+            <li>前端透過 HTTPS API 傳送或讀取遊戲進度。</li>
+            <li>後端依匿名識別碼存取 PostgreSQL 中的進度。</li>
+          </ol>
+          <p class="note">匿名 Cookie 只能辨識目前瀏覽器，不代表登入或真實身分驗證；清除 Cookie 或更換裝置可能無法找回進度。</p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 9: Traceability Matrix -->
-    <section class="slide" data-index="9">
-      <div class="slide-badge">第六章 :: 需求可追溯性矩陣 (RTM)</div>
-      <h2 class="slide-title">需求 (SRS) 至 模組 (SDD) 責任對照表</h2>
-      <div class="card-desc" style="margin-bottom: 10px;">
-        確保 SRS 所定義的所有功能需求與品質屬性，皆可在 SDD 中找到實作模組：
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>SRS 需求編號與名稱</th>
-            <th>parser.js</th>
-            <th>state.js</th>
-            <th>ui.js</th>
-            <th>errorHandler.js</th>
-            <th>audio.js</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>F-01 指令輸入與解析</td>
-            <td>主要實作</td>
-            <td></td>
-            <td>協同</td>
-            <td>協同</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>F-02/F-03 提示與清單 (simple/list)</td>
-            <td>協同</td>
-            <td>主要實作</td>
-            <td>協同</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>F-04/F-05 物件調查與劇情觸發</td>
-            <td>協同</td>
-            <td>主要實作</td>
-            <td>協同</td>
-            <td>協同</td>
-            <td>協同</td>
-          </tr>
-          <tr>
-            <td>F-06 角色重新命名 (name)</td>
-            <td>協同</td>
-            <td>主要實作</td>
-            <td>協同</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>F-08 進度儲存與讀取 (save/load)</td>
-            <td>協同</td>
-            <td>主要實作</td>
-            <td>協同</td>
-            <td>協同</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>F-10 介面與打字機渲染</td>
-            <td></td>
-            <td></td>
-            <td>主要實作</td>
-            <td></td>
-            <td>協同</td>
-          </tr>
-          <tr>
-            <td>F-11 錯誤指令處理</td>
-            <td>協同</td>
-            <td></td>
-            <td>協同</td>
-            <td>主要實作</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- Slide 8 -->
+    <section class="slide" data-index="8">
+      <div class="slide-badge">第四章 :: UI / UX DESIGN</div>
+      <h2 class="slide-title">介面與使用者體驗設計</h2>
 
-    <!-- Slide 10: Summary & Timeline -->
-    <section class="slide" data-index="10">
-      <div class="slide-badge">第七章 :: 專案總結與里程碑規劃</div>
-      <h2 class="slide-title">SDD 成果總結與後續時程規劃</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">終端機首頁</div>
+          <div class="card-desc">顯示開場文字動畫、玩家名稱與指令輸入欄，作為主要操作入口。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">故事與信件</div>
+          <div class="card-desc">以文件或信件版面呈現劇情，部分文字可點擊調查，並支援逐字顯示效果。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">解鎖列表</div>
+          <div class="card-desc">將已開啟的故事項目依類別整理，玩家可從列表再次進入內容。</div>
+        </div>
+      </div>
+
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">SDD 架構設計重點總結</div>
-          <ul>
-            <li><strong>架構權責清晰：</strong> 劃分五大模組，便於小組成員平行分工開發與模組測試。</li>
-            <li><strong>系統品質保障：</strong> 實現 0.1s 解析回應與 100% 全域例外攔截機制。</li>
-            <li><strong>規範嚴謹對齊：</strong> 完全符合 IEEE Std 1016 設計文件描述標準。</li>
-          </ul>
+          <div class="card-title">畫面概念：終端機</div>
+          <pre>┌────────────────────────────┐
+│                  [主題切換] │
+│                            │
+│       Welcome Player!      │
+│                            │
+│ > 輸入指令...              │
+│                            │
+│ 操作提示                   │
+└────────────────────────────┘</pre>
         </div>
         <div class="card">
-          <div class="card-title">專案進度里程碑 (PEP)</div>
+          <div class="card-title">設計原則</div>
           <ul>
-            <li><strong>W1 - W4：</strong> 專案計畫書 (PEP) 完成 ✅</li>
-            <li><strong>W5 - W7：</strong> 需求規格書 (SRS) 定案 ✅</li>
-            <li><strong>W8 - W10：</strong> 軟體設計文件 (SDD) 完成 ✅</li>
-            <li><strong>W11 - W15：</strong> 測試文件 (STD) 與系統測試 🚀</li>
-            <li><strong>W16：</strong> 專案成果 Demo 與 GitHub Pages 發布 🎉</li>
+            <li>黑白主題維持一致的復古終端機風格。</li>
+            <li>指令輸入與按鈕操作並行，方便不同使用習慣的玩家。</li>
+            <li>使用提示文字處理錯誤，避免彈窗中斷閱讀。</li>
+            <li>音效或動畫失敗時，仍可繼續閱讀與操作。</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Slide 11: References & Verification -->
-    <section class="slide" data-index="11">
-      <div class="slide-badge">附錄 :: 參考文獻與專案驗證</div>
-      <h2 class="slide-title">參考文獻與專案驗證連結 (References)</h2>
-      <div class="card" style="line-height: 1.9; margin-top: 10px;">
-        <div class="card-title" style="margin-bottom: 6px;">📚 標準與團隊文件出處</div>
-        <ol>
-          <li>輔仁大學人工智慧與資訊安全學士學位學程第九組（2026）。《K33p_1t_s1mpl3》軟體設計文件 (SDD)。</li>
-          <li>輔仁大學人工智慧與資訊安全學士學位學程第九組（2026）。《K33p_1t_s1mpl3》系統需求規格書 (SRS)。</li>
-          <li>IEEE Computer Society (1998). <i>IEEE Std 1016-1998, Recommended Practice for Software Design Descriptions</i>.</li>
-        </ol>
+    <!-- Slide 9 -->
+    <section class="slide" data-index="9">
+      <div class="slide-badge">第五章 :: QUALITY & SECURITY</div>
+      <h2 class="slide-title">非功能性需求與安全性</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">非功能性需求</div>
+          <ul>
+            <li><strong>可用性：</strong>提供清楚的指令提示與返回方式。</li>
+            <li><strong>穩定性：</strong>錯誤指令或音效失敗不應造成遊戲中斷。</li>
+            <li><strong>相容性：</strong>以現代瀏覽器為主要執行環境。</li>
+            <li><strong>可維護性：</strong>未來將大型元件拆分為不同功能模組。</li>
+            <li><strong>擴充性：</strong>可新增故事內容、指令與互動物件。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">安全性與異常處理</div>
+          <ul>
+            <li>目前沒有玩家帳號、密碼或登入驗證。</li>
+            <li>若採用匿名 Cookie，後端需檢查請求與資料格式；Cookie 不代表玩家真實身分。</li>
+            <li>若未來使用後端，前後端通訊應採 HTTPS。</li>
+            <li>讀取本機 JSON 發生錯誤時，使用預設狀態繼續遊戲。</li>
+            <li>音效無法載入或播放時，略過音效，不影響遊戲流程。</li>
+            <li>未知指令或格式錯誤時，在介面顯示提示訊息。</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="card" style="line-height: 1.9; margin-top: 14px;">
-        <div class="card-title" style="margin-bottom: 6px;">🔗 實作程式碼與線上遊戲驗證 (GitHub)</div>
+      <div class="note">
+        本系統目前為單人瀏覽器遊戲，沒有高併發需求，因此不規劃 Redis 或負載平衡。若未來加入雲端服務，再依使用規模評估。
+      </div>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide" data-index="10">
+      <div class="slide-badge">第六章 :: STATUS & FUTURE PLAN</div>
+      <h2 class="slide-title">目前成果與未來規劃</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">目前已有功能</div>
+          <ul>
+            <li>React、TypeScript 與 Vite 建立的瀏覽器遊戲。</li>
+            <li>終端機風格指令輸入及多個故事畫面。</li>
+            <li>黑白主題切換、開場動畫與信件逐字效果。</li>
+            <li>故事物件調查及已解鎖內容列表。</li>
+            <li>玩家／角色命名與部分 localStorage 保存。</li>
+            <li>指定章節的雨聲、敲門聲等音效效果。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">未來開發項目</div>
+          <ul>
+            <li>完整存檔、讀檔與多存檔槽。</li>
+            <li>以 Node.js、Express 建立後端 API。</li>
+            <li>以 PostgreSQL 保存匿名玩家進度。</li>
+            <li>設計匿名 Cookie 識別及存檔版本檢查。</li>
+            <li>擴充故事章節、互動事件與任務內容。</li>
+            <li>拆分指令、故事資料、狀態與儲存模組。</li>
+            <li>增加自動化測試與錯誤情境測試。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">開發順序建議</div>
+        <p>第一階段完成故事與遊戲流程；第二階段整理前端模組並加入本機完整存檔；第三階段再建置後端、資料庫與匿名玩家進度保存。</p>
+      </div>
+    </section>
+
+    <!-- Slide 11 -->
+    <section class="slide" data-index="11">
+      <div class="slide-badge">附錄 :: REFERENCES</div>
+      <h2 class="slide-title">參考資料與專案連結</h2>
+
+      <div class="card">
+        <div class="card-title">專案資料</div>
         <ul>
-          <li><strong>GitHub 專案庫 (Repository)：</strong> <a href="https://github.com/bibest72-coder/Game_with_no_name_rn_XDD" target="_blank">github.com/bibest72-coder/Game_with_no_name_rn_XDD</a></li>
-          <li><strong>GitHub Pages 線上展示：</strong> <a href="https://bibest72-coder.github.io/Game_with_no_name_rn_XDD/" target="_blank">bibest72-coder.github.io/Game_with_no_name_rn_XDD/</a></li>
+          <li>
+            <strong>GitHub Repository：</strong>
+            <a href="https://github.com/bibest72-coder/Game_with_no_name_rn_XDD" target="_blank" rel="noopener noreferrer">
+              bibest72-coder/Game_with_no_name_rn_XDD
+            </a>
+          </li>
+          <li>
+            <strong>GitHub Pages 遊戲展示：</strong>
+            <a href="https://bibest72-coder.github.io/Game_with_no_name_rn_XDD/" target="_blank" rel="noopener noreferrer">
+              bibest72.github.io/Game_with_no_name_rn_XDD
+            </a>
+          </li>
+          <li><strong>程式架構依據：</strong>專案目前的 React、TypeScript、Vite 程式與遊戲畫面。</li>
         </ul>
       </div>
 
-      <div style="margin-top: 20px; text-align: center; color: var(--highlight-color); font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700;">
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">設計狀態聲明</div>
+        <p>本報告描述目前已實作的瀏覽器端功能，以及後端、資料庫與完整存檔等未來規劃。規劃內容不代表已完成或已部署。</p>
+      </div>
+
+      <div style="margin-top:28px; text-align:center; color:var(--highlight-color); font-family:var(--font-mono); font-weight:800">
         // 報告完畢，感謝聆聽 //
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div>第九組專題報告 :: 輔仁大學人工智慧與資訊安全學學程</div>
+    <div>第九組專題報告</div>
     <div class="progress-bar-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
-    <div>導覽提示：[← 上一頁] [→ 下一頁]</div>
+    <div>導覽：[← 上一頁] [→ 下一頁]</div>
   </footer>
 
-  <!-- Navigation Script -->
   <script>
-    (function() {
+    (() => {
       let currentSlide = 1;
-      const slides = document.querySelectorAll('.slide');
+      const slides = document.querySelectorAll(".slide");
       const totalSlides = slides.length;
-      const pageNumberEl = document.getElementById('pageNumber');
-      const progressBarEl = document.getElementById('progressBar');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
+      const pageNumber = document.getElementById("pageNumber");
+      const progressBar = document.getElementById("progressBar");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
 
-      function updateSlide(newIndex) {
-        if (newIndex < 1) newIndex = 1;
-        if (newIndex > totalSlides) newIndex = totalSlides;
-        
-        currentSlide = newIndex;
-        slides.forEach(slide => {
-          const idx = parseInt(slide.getAttribute('data-index'), 10);
-          if (idx === currentSlide) {
-            slide.classList.add('active');
-          } else {
-            slide.classList.remove('active');
-          }
+      function updateSlide(index) {
+        currentSlide = Math.max(1, Math.min(totalSlides, index));
+
+        slides.forEach((slide) => {
+          const slideIndex = Number(slide.getAttribute("data-index"));
+          slide.classList.toggle("active", slideIndex === currentSlide);
         });
 
-        pageNumberEl.textContent = `${String(currentSlide).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
-        const pct = ((currentSlide - 1) / (totalSlides - 1)) * 100;
-        progressBarEl.style.width = `${pct}%`;
+        pageNumber.textContent =
+          `${String(currentSlide).padStart(2, "0")} / ${String(totalSlides).padStart(2, "0")}`;
 
-        prevBtn.disabled = (currentSlide === 1);
-        nextBtn.disabled = (currentSlide === totalSlides);
+        const percent = totalSlides > 1
+          ? ((currentSlide - 1) / (totalSlides - 1)) * 100
+          : 100;
+
+        progressBar.style.width = `${percent}%`;
+        prevBtn.disabled = currentSlide === 1;
+        nextBtn.disabled = currentSlide === totalSlides;
       }
 
-      prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
-      nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+      prevBtn.addEventListener("click", () => updateSlide(currentSlide - 1));
+      nextBtn.addEventListener("click", () => updateSlide(currentSlide + 1));
 
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ' || e.key.toLowerCase() === 'n') {
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " ") {
+          event.preventDefault();
           updateSlide(currentSlide + 1);
-        } else if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'p') {
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
           updateSlide(currentSlide - 1);
         }
       });
