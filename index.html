@@ -373,7 +373,7 @@
           <div class="card-title">系統簡介</div>
           <div class="card-desc">
             <ul>
-               <li>以<b>瀏覽器為平台</b>b的<b>指令式</b>文字冒險與解謎遊戲</li>
+               <li>以<b>瀏覽器為平台</b>的<b>指令式</b>文字冒險與解謎遊戲</li>
                <li>閱讀信件與故事文件、調查劇情物件，並逐步探索遊戲內容</li>
                <li>黑白主題、文字動畫及音效，營造沉浸式的閱讀與探索體驗</li>
           </div>
@@ -389,22 +389,42 @@
       <div class="card">
         <div class="card-title">專有名詞</div>
         <div class="card-desc">
-          CLIㅤㅤㅤㅤㅤㅤ命令列介面；玩家輸入文字指令的操作方式。<br>
-          SPAㅤㅤㅤㅤㅤㅤ單頁式應用程式；遊戲在同一個網頁中切換不同畫面。<br>
+          CLIㅤㅤㅤㅤㅤㅤㅤ命令列介面；玩家輸入文字指令的操作方式。<br>
+          SPAㅤㅤㅤㅤㅤㅤㅤ單頁式應用程式；遊戲在同一個網頁中切換不同畫面。<br>
           Viewㅤㅤㅤㅤㅤㅤ遊戲中的畫面，例如終端機、故事文件或解鎖列表。<br>
           解鎖項目ㅤㅤㅤㅤ玩家進入或發現後，會記錄在探索列表中的內容。<br>
+          localStorageㅤㅤ瀏覽器本機儲存功能，目前用於保存部分玩家資料。<br>
           存檔／讀檔ㅤㅤㅤ玩家保存及載入遊戲進度。<br>
         </div>
       </div>
     </section>
 
-    <!-- Slide 3: System Modules & Responsibility -->
+    <!-- 架構說明、模組劃分 and 技術棧 -->
     <section class="slide" data-index="3">
-      <div class="slide-badge">第二章 :: 系統分解視圖 (DECOMPOSITION VIEW)</div>
-      <h2 class="slide-title">系統模組架構與職責分配</h2>
+      <h2 class="slide-title">系統架構設計（System Architecture）</h2>
       <div class="card-desc" style="margin-bottom: 12px;">
-        依據 IEEE 1016 規範將系統解耦為五大高內聚、低耦合之模組，並明確劃分程式組職責：
+        系統目前採用瀏覽器端前端架構，使用 React 建立畫面，TypeScript 撰寫程式，Vite 負責開發與建置。遊戲主要邏輯在瀏覽器內執行，部分設定與解鎖資料使用 localStorage 保存。目前沒有後端伺服器或資料庫。
       </div>
+      <div class="card-title">架構說明</div>
+          <pre>
+            玩家
+             │ 輸入指令、點擊按鈕、閱讀內容
+             ▼
+            React 遊戲介面
+             ├─ 畫面與導覽
+             ├─ 指令處理
+             ├─ 故事與物件互動
+             ├─ 解鎖進度管理
+             └─ 主題、動畫與音效
+                      │
+                      ▼
+            瀏覽器 localStorage
+            （保存部分玩家設定與進度）
+                      │
+                      ▼
+                    存檔
+          </pre>
+        </div>
       <table>
         <thead>
           <tr>
