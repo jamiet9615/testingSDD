@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>《K33p_1t_s1mpl3》軟體設計文件 (SDD) 專題報告</title>
+  <title>《K33p_1t_s1mpl3》SDD_報告 </title>
   <style>
     :root {
       --bg-color: #f4f4f7;
@@ -355,42 +355,43 @@
 
     <!-- Slide 1: Cover -->
     <section class="slide cover-slide active" data-index="1">
-      <div class="slide-badge">SOFTWARE DESIGN DESCRIPTION (SDD-2026-001-1 v1.1)</div>
       <h1 class="cover-title">K33p_1t_s1mpl3</h1>
-      <div class="cover-subtitle">軟體設計文件專題報告 (IEEE Std 1016 架構與實作設計)</div>
+      <div class="cover-subtitle">SDD 報告</div>
       <div class="cover-meta">
-        <div><strong>課程名稱：</strong> 軟體工程概論</div>
         <div><strong>專案組別：</strong> 第九組</div>
         <div><strong>團隊成員：</strong> 王文伶、杜汯溱、余苡萱、吳千心、王瑀彤</div>
         <div><strong>指導教授：</strong> 杜海倫 教授</div>
-        <div><strong>設計標準：</strong> IEEE Std 1016 軟體設計描述規範</div>
       </div>
     </section>
 
-    <!-- Slide 2: SRS vs SDD Difference & Goals -->
+    <!-- Slide 2: 系統簡介 and 文件目的與範圍 and 專有名詞 -->
     <section class="slide" data-index="2">
-      <div class="slide-badge">第一章 :: SRS 與 SDD 之定位差異與品質目標</div>
-      <h2 class="slide-title">需求 (SRS) 轉譯為 設計 (SDD) 之架構目標</h2>
+      <h2 class="slide-title"> 系統概述與目的（Introduction）</h2>
       
       <div class="grid-2" style="margin-bottom: 14px;">
         <div class="card">
-          <div class="card-title">SRS 需求規格（系統要做什麼？）</div>
+          <div class="card-title">系統簡介</div>
           <div class="card-desc">
-            定義使用者功能需求（如指令比對、文字打字機、LocalStorage 儲存進度）與外部品質約束（如 0.1s 回應時間、不崩潰防呆機制）。
+            《K33p_1t_s1mpl3》是一款以瀏覽器為平台的互動式文字冒險與解謎遊戲。玩家透過終端機風格的介面輸入指令，閱讀信件與故事文件、調查劇情物件，並逐步探索遊戲內容。遊戲結合黑白主題、文字動畫及音效，以營造沉浸式的閱讀與探索體驗。
           </div>
         </div>
         <div class="card">
-          <div class="card-title">SDD 設計描述（程式如何實作？）</div>
+          <div class="card-title">目的與範圍</div>
           <div class="card-desc">
-            將需求拆解為具體的<b>程式模組分工</b>（<code>parser.js</code>, <code>state.js</code>, <code>ui.js</code>）、<b>正規表達式與演算法</b>、以及<b>JSON 資料字典與 Schema 驗證機制</b>。
+            說明系統的整體架構、主要模組、操作流程、介面與資料設計，涵蓋遊戲前端、指令處理、故事內容、解鎖列表、玩家設定、音效動畫、存檔與讀檔。
           </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">技術選擇與架構約束</div>
+        <div class="card-title">專有名詞</div>
         <div class="card-desc">
-          採用<b>無後端純前端架構 (HTML5 / ES6 JavaScript / TypeScript)</b>，無須安裝伺服器或資料庫即可運作，完全杜絕個資外洩風險（NF-08），並滿足首頁 3 秒內完成載入之指標（NF-07）。
+          CLI	命令列介面；玩家輸入文字指令的操作方式。<br>
+          SPA	單頁式應用程式；遊戲在同一個網頁中切換不同畫面。<br>
+          View	遊戲中的畫面，例如終端機、故事文件或解鎖列表。<br>
+          解鎖項目	玩家進入或發現後，會記錄在探索列表中的內容。<br>
+          localStorage	瀏覽器本機儲存功能，目前用於保存部分玩家資料。<br>
+          存檔／讀檔	保存及載入遊戲進度；目前屬於未來規劃功能。<br>
         </div>
       </div>
     </section>
