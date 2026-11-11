@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>《K33p_1t_S1mpl3》SDD 報告</title>
+
   <style>
     :root {
       --bg-color: #f4f4f7;
@@ -34,7 +35,8 @@
       line-height: 1.6;
     }
 
-    header, footer {
+    header,
+    footer {
       z-index: 10;
       display: flex;
       align-items: center;
@@ -54,7 +56,8 @@
       font-weight: 600;
     }
 
-    .brand, .controls {
+    .brand,
+    .controls {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -175,7 +178,8 @@
       font-weight: 800;
     }
 
-    .grid-2, .grid-3 {
+    .grid-2,
+    .grid-3 {
       display: grid;
       gap: 16px;
       margin-top: 10px;
@@ -203,7 +207,9 @@
       font-weight: 800;
     }
 
-    .card-desc, p, li {
+    .card-desc,
+    p,
+    li {
       color: var(--text-muted);
       font-size: .92rem;
     }
@@ -212,12 +218,17 @@
       margin-top: 8px;
     }
 
-    ul, ol {
+    ul,
+    ol {
       padding-left: 21px;
     }
 
     li {
       margin-bottom: 5px;
+    }
+
+    li strong {
+      color: var(--text-main);
     }
 
     table {
@@ -227,7 +238,8 @@
       font-size: .86rem;
     }
 
-    th, td {
+    th,
+    td {
       padding: 8px 10px;
       border: 1px solid var(--border-color);
       text-align: left;
@@ -243,7 +255,8 @@
       background: #f8fafc;
     }
 
-    pre, code {
+    pre,
+    code {
       font-family: var(--font-mono);
     }
 
@@ -299,7 +312,8 @@
     }
 
     @media (max-width: 800px) {
-      header, footer {
+      header,
+      footer {
         padding: 10px 14px;
       }
 
@@ -325,7 +339,8 @@
         padding: 22px 18px;
       }
 
-      .grid-2, .grid-3 {
+      .grid-2,
+      .grid-3 {
         grid-template-columns: 1fr;
       }
 
@@ -339,25 +354,27 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <header>
     <div class="brand">
       <span class="tag-label">SDD</span>
       <span>K33P_1T_S1MPL3 :: 軟體設計文件報告</span>
     </div>
+
     <div class="controls">
-      <button class="btn" id="prevBtn">上一頁</button>
+      <button class="btn" id="prevBtn" type="button">上一頁</button>
       <span class="page-indicator" id="pageNumber">01 / 11</span>
-      <button class="btn" id="nextBtn">下一頁</button>
+      <button class="btn" id="nextBtn" type="button">下一頁</button>
     </div>
   </header>
 
   <main>
-    <!-- Slide 1 -->
+    <!-- Slide 1：封面 -->
     <section class="slide cover-slide active" data-index="1">
       <h1 class="cover-title">K33p_1t_s1mpl3</h1>
       <div class="cover-subtitle">Software Design Document｜軟體設計文件</div>
+
       <div class="cover-meta">
         <div><strong>專案名稱：</strong>Game_with_no_name_rn_XDD</div>
         <div><strong>專案組別：</strong>第九組</div>
@@ -367,7 +384,7 @@
       </div>
     </section>
 
-    <!-- Slide 2 -->
+    <!-- Slide 2：系統概述與目的 -->
     <section class="slide" data-index="2">
       <div class="slide-badge">第一章 :: INTRODUCTION</div>
       <h2 class="slide-title">系統概述與目的</h2>
@@ -378,7 +395,7 @@
           <div class="card-desc">
             <ul>
               <li>以瀏覽器為平台的指令式文字冒險與解謎遊戲。</li>
-              <li>玩家輸入指令，閱讀信件與故事文件，並調查劇情物件。</li>
+              <li>玩家輸入指令、閱讀信件與故事文件，並調查劇情物件。</li>
               <li>使用黑白主題、文字動畫及音效營造探索氛圍。</li>
             </ul>
           </div>
@@ -387,8 +404,10 @@
         <div class="card">
           <div class="card-title">文件目的與範圍</div>
           <div class="card-desc">
-            本文件說明系統架構、主要模組、操作流程、介面與資料設計，供專案成員、開發人員及測試人員參考。
-            目前已有的功能與未來規劃會分開說明；完整存檔、讀檔及後端服務屬於未來規劃。
+            本文件說明系統架構、主要模組、操作流程、介面與資料設計，
+            供專案成員、開發人員及測試人員參考。
+            目前已有的功能與未來規劃會分開說明；
+            完整存檔與讀檔屬於未來規劃。
           </div>
         </div>
       </div>
@@ -397,105 +416,216 @@
         <div class="card-title">專有名詞</div>
         <table>
           <thead>
-            <tr><th>名詞</th><th>說明</th></tr>
+            <tr>
+              <th>名詞</th>
+              <th>說明</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>CLI</td><td>命令列介面；玩家輸入文字指令的操作方式。</td></tr>
-            <tr><td>SPA</td><td>單頁式應用程式；遊戲在同一網頁中切換不同畫面。</td></tr>
-            <tr><td>View</td><td>遊戲畫面，例如終端機、故事文件或解鎖列表。</td></tr>
-            <tr><td>解鎖項目</td><td>玩家進入或發現後，記錄於探索列表中的內容。</td></tr>
-            <tr><td>localStorage</td><td>瀏覽器本機儲存功能，目前用於保存部分玩家資料。</td></tr>
-            <tr><td>匿名識別 Cookie</td><td>未來可用來辨識同一瀏覽器的匿名玩家，不代表真實身分驗證。</td></tr>
+            <tr>
+              <td>CLI</td>
+              <td>命令列介面；玩家輸入文字指令的操作方式。</td>
+            </tr>
+            <tr>
+              <td>SPA</td>
+              <td>單頁式應用程式；遊戲在同一網頁中切換不同畫面。</td>
+            </tr>
+            <tr>
+              <td>View</td>
+              <td>遊戲畫面，例如終端機、故事文件或解鎖列表。</td>
+            </tr>
+            <tr>
+              <td>解鎖項目</td>
+              <td>玩家進入或發現後，記錄於探索列表中的內容。</td>
+            </tr>
+            <tr>
+              <td>localStorage</td>
+              <td>瀏覽器本機儲存功能，目前用於保存部分玩家資料。</td>
+            </tr>
+            <tr>
+              <td>存檔／讀檔</td>
+              <td>保存或載入遊戲進度；目前尚未形成完整功能。</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Slide 3 -->
+    <!-- Slide 3：系統架構與技術棧 -->
     <section class="slide" data-index="3">
       <div class="slide-badge">第二章 :: SYSTEM ARCHITECTURE</div>
       <h2 class="slide-title">系統架構與技術棧</h2>
 
       <div class="note">
-        現況：遊戲為瀏覽器端前端應用，部分資料存於 localStorage。以下後端 API、Cookie 與資料庫為未來規劃，尚未實作。
+        系統採用瀏覽器端架構，不設置後端 API 或資料庫。
+        Node.js 僅供開發與建置工具使用，不負責玩家資料管理。
       </div>
 
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">目標架構（後端為規劃功能）</div>
+          <div class="card-title">目前系統架構</div>
           <pre>玩家
  │ 輸入指令、點擊按鈕、閱讀內容
  ▼
-React 遊戲介面
- ├─ 畫面與導覽
+瀏覽器中的 React 遊戲
+ ├─ 畫面與頁面導覽
  ├─ 指令處理
  ├─ 故事與物件互動
- └─ 解鎖進度管理
-          │ HTTPS / REST API
-          ▼
-後端 API（Node.js + Express）
- ├─ 建立匿名玩家識別
- ├─ 接收與驗證進度資料
- └─ 讀取或更新存檔
+ ├─ 解鎖進度管理
+ └─ 主題、動畫與音效
           │
           ▼
-PostgreSQL 資料庫
-（未來保存匿名玩家進度）</pre>
-          <p>靜態網站主機提供前端檔案；後端 API 與資料庫需另外部署。</p>
+瀏覽器 localStorage
+（保存部分玩家設定與解鎖資料）
+
+GitHub Pages
+（提供建置後的靜態網站檔案）</pre>
+          <p>
+            遊戲功能在瀏覽器執行；GitHub Pages 負責提供網頁與靜態資源，
+            不負責執行遊戲後端。
+          </p>
         </div>
 
         <div class="card">
           <div class="card-title">技術棧</div>
           <table>
-            <thead><tr><th>項目</th><th>技術／狀態</th></tr></thead>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>使用技術與用途</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>程式語言</td><td>TypeScript、HTML、CSS（現有）</td></tr>
-              <tr><td>前端框架</td><td>React（現有）</td></tr>
-              <tr><td>建置工具</td><td>Vite（現有）</td></tr>
-              <tr><td>UI 樣式</td><td>CSS、Tailwind CSS（現有）</td></tr>
-              <tr><td>本機資料保存</td><td>localStorage（現有）</td></tr>
-              <tr><td>音效</td><td>瀏覽器 Audio API（現有）</td></tr>
-              <tr><td>後端</td><td>Node.js、Express、TypeScript（規劃）</td></tr>
-              <tr><td>資料庫</td><td>PostgreSQL（規劃）</td></tr>
-              <tr><td>前後端通訊</td><td>HTTPS REST API（規劃）</td></tr>
-              <tr><td>玩家識別</td><td>匿名 Cookie（規劃，非登入驗證）</td></tr>
+              <tr>
+                <td>程式語言</td>
+                <td>TypeScript、HTML、CSS</td>
+              </tr>
+              <tr>
+                <td>前端框架</td>
+                <td>React</td>
+              </tr>
+              <tr>
+                <td>建置工具</td>
+                <td>Vite</td>
+              </tr>
+              <tr>
+                <td>開發／建置環境</td>
+                <td>Node.js，用於執行 Vite 與相關開發工具</td>
+              </tr>
+              <tr>
+                <td>UI 樣式</td>
+                <td>CSS、Tailwind CSS</td>
+              </tr>
+              <tr>
+                <td>本機資料保存</td>
+                <td>瀏覽器 localStorage</td>
+              </tr>
+              <tr>
+                <td>音效</td>
+                <td>瀏覽器 Audio API</td>
+              </tr>
+              <tr>
+                <td>後端與資料庫</td>
+                <td>不使用；不在本專案規劃範圍內</td>
+              </tr>
+              <tr>
+                <td>部署方式</td>
+                <td>GitHub Pages 靜態網站</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-title">Node.js 在本專案中的用途</div>
+        <p>
+          Node.js 是開發與建置階段所使用的執行環境，用來執行 Vite 等工具。
+          遊戲部署後仍由瀏覽器執行，不會有常駐的 Node.js 後端伺服器。
+        </p>
+      </div>
     </section>
 
-    <!-- Slide 4 -->
+    <!-- Slide 4：模組劃分與程式檔案 -->
     <section class="slide" data-index="4">
       <div class="slide-badge">第二章 :: MODULE DESIGN</div>
-      <h2 class="slide-title">模組劃分與互動關係</h2>
+      <h2 class="slide-title">模組劃分與程式檔案</h2>
 
       <div class="card">
-        <div class="card-title">主要模組</div>
+        <div class="card-title">主要模組與程式檔案</div>
         <table>
           <thead>
-            <tr><th>模組</th><th>主要責任</th><th>狀態</th></tr>
+            <tr>
+              <th>功能／模組</th>
+              <th>負責內容</th>
+              <th>主要檔案</th>
+              <th>狀態</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>遊戲介面與導覽</td><td>顯示終端機、信件、故事文件、調查頁與列表，處理畫面切換。</td><td>已實作</td></tr>
-            <tr><td>指令處理</td><td>解析玩家輸入，執行主題切換、命名、頁面導覽及物件調查。</td><td>已實作於 App.tsx</td></tr>
-            <tr><td>故事內容</td><td>呈現 README、HELP_67、01_GR_1、彩蛋及調查內容。</td><td>部分實作，可擴充</td></tr>
-            <tr><td>解鎖與列表</td><td>記錄已解鎖項目，依類別顯示於 list 頁面。</td><td>已實作</td></tr>
-            <tr><td>玩家設定</td><td>管理玩家名稱、角色名稱與資料夾顯示名稱。</td><td>已實作</td></tr>
-            <tr><td>動畫與音效</td><td>處理開場動畫、信件逐字效果、主題及故事音效。</td><td>已實作</td></tr>
-            <tr><td>存檔與讀檔</td><td>保存、載入完整進度及管理存檔槽。</td><td>未來規劃</td></tr>
-            <tr><td>後端資料服務</td><td>提供玩家識別、進度 API 與資料庫存取。</td><td>未來規劃</td></tr>
+            <tr>
+              <td>遊戲介面與頁面導覽</td>
+              <td>顯示終端機、信件、故事文件、調查頁及列表，處理畫面切換。</td>
+              <td><code>src/App.tsx</code></td>
+              <td>已實作</td>
+            </tr>
+            <tr>
+              <td>指令處理</td>
+              <td>處理主題切換、頁面導覽、命名、列表及物件調查等指令。</td>
+              <td><code>src/App.tsx</code></td>
+              <td>已實作；尚未獨立拆分</td>
+            </tr>
+            <tr>
+              <td>故事與互動內容</td>
+              <td>呈現 README、HELP_67、01_GR_1、彩蛋及物件調查內容。</td>
+              <td><code>src/App.tsx</code></td>
+              <td>部分實作，可擴充</td>
+            </tr>
+            <tr>
+              <td>玩家資料與解鎖進度</td>
+              <td>管理玩家名稱、角色名稱、資料夾名稱與已解鎖項目。</td>
+              <td><code>src/App.tsx</code>、瀏覽器 <code>localStorage</code></td>
+              <td>部分資料已保存</td>
+            </tr>
+            <tr>
+              <td>樣式與畫面外觀</td>
+              <td>提供全域樣式，以及部分元件動畫與主題樣式。</td>
+              <td><code>src/index.css</code>、<code>src/App.tsx</code></td>
+              <td>已實作</td>
+            </tr>
+            <tr>
+              <td>應用程式入口</td>
+              <td>建立並掛載 React 應用程式。</td>
+              <td><code>src/main.tsx</code></td>
+              <td>已實作</td>
+            </tr>
+            <tr>
+              <td>開發與建置設定</td>
+              <td>設定 Vite 開發伺服器與建置流程。</td>
+              <td><code>vite.config.ts</code>、<code>package.json</code></td>
+              <td>已實作</td>
+            </tr>
+            <tr>
+              <td>完整存檔與讀檔</td>
+              <td>提供完整進度保存、載入與多存檔槽。</td>
+              <td>尚未建立</td>
+              <td>未來規劃</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
       <div class="card" style="margin-top:14px">
-        <div class="card-title">現有程式結構說明</div>
-        <p>目前主要遊戲邏輯與畫面集中在 <code>src/App.tsx</code>，入口為 <code>src/main.tsx</code>，樣式包含於 <code>src/index.css</code> 與元件內樣式。未來可再拆分指令、故事資料、存檔與畫面元件。</p>
+        <div class="card-title">目前程式結構</div>
+        <p>
+          目前主要遊戲邏輯與畫面集中在 <code>src/App.tsx</code>，
+          入口為 <code>src/main.tsx</code>，全域樣式位於
+          <code>src/index.css</code>。指令、故事與資料保存邏輯尚未拆分為獨立檔案。
+        </p>
       </div>
     </section>
 
-    <!-- Slide 5 -->
+    <!-- Slide 5：指令設計 -->
     <section class="slide" data-index="5">
       <div class="slide-badge">第三章 :: COMMAND DESIGN</div>
       <h2 class="slide-title">指令介面與處理設計</h2>
@@ -504,18 +634,57 @@ PostgreSQL 資料庫
         <div class="card">
           <div class="card-title">目前主要指令</div>
           <table>
-            <thead><tr><th>指令</th><th>功能</th></tr></thead>
+            <thead>
+              <tr>
+                <th>指令</th>
+                <th>功能</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>simple</code></td><td>開啟說明信件。</td></tr>
-              <tr><td><code>01_GR_1</code></td><td>開啟故事文件。</td></tr>
-              <tr><td><code>HELP_67</code></td><td>開啟 HELP_67 文件。</td></tr>
-              <tr><td><code>inspect_ri</code></td><td>開啟山脊旅店調查內容。</td></tr>
-              <tr><td><code>inspect_sh</code></td><td>開啟 Shiminaseo 調查內容。</td></tr>
-              <tr><td><code>list</code></td><td>查看已解鎖內容。</td></tr>
-              <tr><td><code>theme</code>、<code>black</code>、<code>white</code></td><td>切換或指定黑白主題。</td></tr>
-              <tr><td><code>name</code>、<code>6</code>、<code>7</code></td><td>變更玩家或角色名稱。</td></tr>
-              <tr><td><code>title</code>／<code>tittle</code></td><td>自訂列表中的資料夾名稱。</td></tr>
-              <tr><td><code>back</code>、<code>exit</code>、Esc</td><td>返回終端機或前一畫面。</td></tr>
+              <tr>
+                <td><code>simple</code></td>
+                <td>開啟說明信件。</td>
+              </tr>
+              <tr>
+                <td><code>k33p_1t_s1mpl3</code></td>
+                <td>開啟彩蛋信件頁面。</td>
+              </tr>
+              <tr>
+                <td><code>01_GR_1</code></td>
+                <td>開啟故事文件。</td>
+              </tr>
+              <tr>
+                <td><code>HELP_67</code></td>
+                <td>開啟 HELP_67 文件。</td>
+              </tr>
+              <tr>
+                <td><code>inspect_ri</code></td>
+                <td>開啟山脊旅店調查內容。</td>
+              </tr>
+              <tr>
+                <td><code>inspect_sh</code></td>
+                <td>開啟 Shiminaseo 調查內容。</td>
+              </tr>
+              <tr>
+                <td><code>list</code></td>
+                <td>查看已解鎖內容。</td>
+              </tr>
+              <tr>
+                <td><code>theme</code>、<code>black</code>、<code>white</code></td>
+                <td>切換或指定黑白主題。</td>
+              </tr>
+              <tr>
+                <td><code>name</code>、<code>6</code>、<code>7</code></td>
+                <td>變更玩家或角色名稱。</td>
+              </tr>
+              <tr>
+                <td><code>title</code>／<code>tittle</code></td>
+                <td>自訂列表中的資料夾名稱。</td>
+              </tr>
+              <tr>
+                <td><code>back</code>、<code>exit</code>、Esc</td>
+                <td>返回終端機或前一畫面。</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -524,21 +693,23 @@ PostgreSQL 資料庫
           <div class="card-title">指令處理流程</div>
           <ol>
             <li>玩家於終端機或列表頁輸入指令。</li>
-            <li>系統清除前後空白並辨識指令名稱與參數。</li>
+            <li>系統移除指令前後空白並判斷指令內容。</li>
             <li>依指令更新畫面、名稱、主題或解鎖狀態。</li>
             <li>需要保存的部分資料寫入 localStorage。</li>
             <li>若指令無效或格式錯誤，顯示提示訊息。</li>
           </ol>
+
           <div class="note">
-            完整的 <code>save</code>／<code>load</code> 指令目前尚未實作；若未來加入，需連接本機存檔或後端 API。
+            完整的 <code>save</code>／<code>load</code> 指令目前尚未實作。
+            未來若加入，將以瀏覽器本機保存為方向，不規劃後端 API。
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 6 -->
+    <!-- Slide 6：畫面狀態與流程 -->
     <section class="slide" data-index="6">
-      <div class="slide-badge">第三章 :: STATE & NAVIGATION</div>
+      <div class="slide-badge">第三章 :: STATE &amp; NAVIGATION</div>
       <h2 class="slide-title">畫面狀態與操作流程</h2>
 
       <div class="grid-2">
@@ -573,50 +744,91 @@ PostgreSQL 資料庫
           <p>玩家進入特定內容後，系統會將該內容加入已解鎖清單。</p>
         </div>
       </div>
+
+      <div class="note">
+        畫面切換與返回邏輯目前由 React 狀態控制，未使用獨立路由套件。
+      </div>
     </section>
 
-    <!-- Slide 7 -->
+    <!-- Slide 7：資料保存 -->
     <section class="slide" data-index="7">
       <div class="slide-badge">第三章 :: DATA DESIGN</div>
-      <h2 class="slide-title">資料保存與未來存檔設計</h2>
+      <h2 class="slide-title">本機資料保存與存檔規劃</h2>
 
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">目前本機保存資料</div>
+          <div class="card-title">目前保存於 localStorage 的資料</div>
           <table>
-            <thead><tr><th>localStorage Key</th><th>用途</th></tr></thead>
+            <thead>
+              <tr>
+                <th>資料 Key</th>
+                <th>用途</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><code>cli_folder_names</code></td><td>自訂資料夾名稱。</td></tr>
-              <tr><td><code>cli_unlocked_letters</code></td><td>已解鎖的信件與文件項目。</td></tr>
-              <tr><td><code>cli_user_name_v2</code></td><td>玩家名稱。</td></tr>
-              <tr><td><code>cli_name_6</code>、<code>cli_name_7</code></td><td>角色名稱。</td></tr>
-              <tr><td><code>cli_used_names</code></td><td>曾使用過的名稱。</td></tr>
+              <tr>
+                <td><code>cli_folder_names</code></td>
+                <td>保存自訂資料夾名稱。</td>
+              </tr>
+              <tr>
+                <td><code>cli_unlocked_letters</code></td>
+                <td>保存已解鎖的信件與文件項目。</td>
+              </tr>
+              <tr>
+                <td><code>cli_user_name_v2</code></td>
+                <td>保存玩家名稱。</td>
+              </tr>
+              <tr>
+                <td><code>cli_name_6</code></td>
+                <td>保存角色 6 的名稱。</td>
+              </tr>
+              <tr>
+                <td><code>cli_name_7</code></td>
+                <td>保存角色 7 的名稱。</td>
+              </tr>
+              <tr>
+                <td><code>cli_used_names</code></td>
+                <td>保存已使用過的名稱。</td>
+              </tr>
+              <tr>
+                <td><code>game_fresh_start_play_v1</code></td>
+                <td>標記初次啟動時的一次性資料重置流程。</td>
+              </tr>
             </tbody>
           </table>
-          <p class="note">這是部分狀態的本機保存，不等同於完整存檔／讀檔，也無法跨瀏覽器同步。</p>
+
+          <p class="note">
+            以上是目前保存的部分資料，不代表已有完整存檔／讀檔功能。
+            資料只存在目前瀏覽器，無法自動跨裝置同步。
+          </p>
         </div>
 
         <div class="card">
-          <div class="card-title">未來雲端存檔概念</div>
+          <div class="card-title">未來本機存檔規劃</div>
           <pre>SaveData
-├─ version       存檔格式版本
-├─ savedAt       最後保存時間
-├─ playerNames   玩家與角色名稱
-├─ unlockedItems 已解鎖內容
-├─ readChapters  已讀章節
-└─ settings      主題及其他設定</pre>
-          <ol>
-            <li>瀏覽器首次連線時，後端建立匿名識別碼。</li>
-            <li>識別碼以 Cookie 儲存在該瀏覽器。</li>
-            <li>前端透過 HTTPS API 傳送或讀取遊戲進度。</li>
-            <li>後端依匿名識別碼存取 PostgreSQL 中的進度。</li>
-          </ol>
-          <p class="note">匿名 Cookie 只能辨識目前瀏覽器，不代表登入或真實身分驗證；清除 Cookie 或更換裝置可能無法找回進度。</p>
+├─ version         存檔格式版本
+├─ savedAt         最後保存時間
+├─ userName        玩家名稱
+├─ name6 / name7   角色名稱
+├─ unlockedLetters 已解鎖內容
+├─ usedNames       已使用名稱
+└─ folderNames     自訂資料夾名稱</pre>
+
+          <ul>
+            <li>將分散保存的資料整理成一份可檢查版本的存檔資料。</li>
+            <li>未來可加入手動儲存、載入及重置遊戲功能。</li>
+            <li>讀取存檔時檢查格式；資料無效時使用預設狀態。</li>
+            <li>存檔仍位於玩家瀏覽器，不需要後端或資料庫。</li>
+          </ul>
+
+          <p class="note">
+            完整存檔與讀檔目前尚未實作；目前只有部分資料以 localStorage 保存。
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 8 -->
+    <!-- Slide 8：UI/UX -->
     <section class="slide" data-index="8">
       <div class="slide-badge">第四章 :: UI / UX DESIGN</div>
       <h2 class="slide-title">介面與使用者體驗設計</h2>
@@ -624,15 +836,23 @@ PostgreSQL 資料庫
       <div class="grid-3">
         <div class="card">
           <div class="card-title">終端機首頁</div>
-          <div class="card-desc">顯示開場文字動畫、玩家名稱與指令輸入欄，作為主要操作入口。</div>
+          <div class="card-desc">
+            顯示開場文字動畫、玩家名稱與指令輸入欄，作為主要操作入口。
+          </div>
         </div>
+
         <div class="card">
           <div class="card-title">故事與信件</div>
-          <div class="card-desc">以文件或信件版面呈現劇情，部分文字可點擊調查，並支援逐字顯示效果。</div>
+          <div class="card-desc">
+            以文件或信件版面呈現劇情，部分文字可點擊調查，並支援逐字顯示效果。
+          </div>
         </div>
+
         <div class="card">
           <div class="card-title">解鎖列表</div>
-          <div class="card-desc">將已開啟的故事項目依類別整理，玩家可從列表再次進入內容。</div>
+          <div class="card-desc">
+            將已開啟的故事項目依類別整理，玩家可從列表再次進入內容。
+          </div>
         </div>
       </div>
 
@@ -649,6 +869,7 @@ PostgreSQL 資料庫
 │ 操作提示                   │
 └────────────────────────────┘</pre>
         </div>
+
         <div class="card">
           <div class="card-title">設計原則</div>
           <ul>
@@ -656,15 +877,16 @@ PostgreSQL 資料庫
             <li>指令輸入與按鈕操作並行，方便不同使用習慣的玩家。</li>
             <li>使用提示文字處理錯誤，避免彈窗中斷閱讀。</li>
             <li>音效或動畫失敗時，仍可繼續閱讀與操作。</li>
+            <li>支援鍵盤快捷操作，例如 Esc 返回及主題切換快捷鍵。</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Slide 9 -->
+    <!-- Slide 9：非功能性需求 -->
     <section class="slide" data-index="9">
-      <div class="slide-badge">第五章 :: QUALITY & SECURITY</div>
-      <h2 class="slide-title">非功能性需求與安全性</h2>
+      <div class="slide-badge">第五章 :: QUALITY &amp; SECURITY</div>
+      <h2 class="slide-title">非功能性需求與異常處理</h2>
 
       <div class="grid-2">
         <div class="card">
@@ -673,7 +895,7 @@ PostgreSQL 資料庫
             <li><strong>可用性：</strong>提供清楚的指令提示與返回方式。</li>
             <li><strong>穩定性：</strong>錯誤指令或音效失敗不應造成遊戲中斷。</li>
             <li><strong>相容性：</strong>以現代瀏覽器為主要執行環境。</li>
-            <li><strong>可維護性：</strong>未來將大型元件拆分為不同功能模組。</li>
+            <li><strong>可維護性：</strong>未來可將大型元件拆分為不同功能模組。</li>
             <li><strong>擴充性：</strong>可新增故事內容、指令與互動物件。</li>
           </ul>
         </div>
@@ -681,60 +903,64 @@ PostgreSQL 資料庫
         <div class="card">
           <div class="card-title">安全性與異常處理</div>
           <ul>
-            <li>目前沒有玩家帳號、密碼或登入驗證。</li>
-            <li>若採用匿名 Cookie，後端需檢查請求與資料格式；Cookie 不代表玩家真實身分。</li>
-            <li>若未來使用後端，前後端通訊應採 HTTPS。</li>
-            <li>讀取本機 JSON 發生錯誤時，使用預設狀態繼續遊戲。</li>
-            <li>音效無法載入或播放時，略過音效，不影響遊戲流程。</li>
+            <li>系統不設置玩家帳號、密碼、登入驗證或後端 API。</li>
+            <li>玩家資料由瀏覽器 localStorage 保存，不保存密碼或敏感個人資料。</li>
+            <li>讀取資料失敗或 JSON 格式錯誤時，使用預設狀態繼續遊戲。</li>
+            <li>音效無法載入或播放時，略過音效，不影響遊戲操作。</li>
             <li>未知指令或格式錯誤時，在介面顯示提示訊息。</li>
+            <li>清除瀏覽器資料或更換裝置時，可能無法保留原有進度。</li>
           </ul>
         </div>
       </div>
 
       <div class="note">
-        本系統目前為單人瀏覽器遊戲，沒有高併發需求，因此不規劃 Redis 或負載平衡。若未來加入雲端服務，再依使用規模評估。
+        本系統為瀏覽器端單人遊戲，不需要後端伺服器、資料庫、Redis 或負載平衡。
+        Node.js 僅用於開發與建置階段。
       </div>
     </section>
 
-    <!-- Slide 10 -->
+    <!-- Slide 10：成果與未來規劃 -->
     <section class="slide" data-index="10">
-      <div class="slide-badge">第六章 :: STATUS & FUTURE PLAN</div>
+      <div class="slide-badge">第六章 :: STATUS &amp; FUTURE PLAN</div>
       <h2 class="slide-title">目前成果與未來規劃</h2>
 
       <div class="grid-2">
         <div class="card">
           <div class="card-title">目前已有功能</div>
           <ul>
-            <li>React、TypeScript 與 Vite 建立的瀏覽器遊戲。</li>
+            <li>使用 React、TypeScript 與 Vite 建立的瀏覽器遊戲。</li>
             <li>終端機風格指令輸入及多個故事畫面。</li>
             <li>黑白主題切換、開場動畫與信件逐字效果。</li>
             <li>故事物件調查及已解鎖內容列表。</li>
             <li>玩家／角色命名與部分 localStorage 保存。</li>
-            <li>指定章節的雨聲、敲門聲等音效效果。</li>
+            <li>指定章節的雨聲、敲門聲、腳步聲及開門聲效果。</li>
           </ul>
         </div>
 
         <div class="card">
           <div class="card-title">未來開發項目</div>
           <ul>
-            <li>完整存檔、讀檔與多存檔槽。</li>
-            <li>以 Node.js、Express 建立後端 API。</li>
-            <li>以 PostgreSQL 保存匿名玩家進度。</li>
-            <li>設計匿名 Cookie 識別及存檔版本檢查。</li>
+            <li>加入完整的本機存檔與讀檔流程。</li>
+            <li>評估多存檔槽、進度重置與存檔格式版本管理。</li>
             <li>擴充故事章節、互動事件與任務內容。</li>
-            <li>拆分指令、故事資料、狀態與儲存模組。</li>
-            <li>增加自動化測試與錯誤情境測試。</li>
+            <li>將指令、故事資料、狀態管理與儲存邏輯拆分為不同模組。</li>
+            <li>增加指令處理、資料保存及頁面導覽的自動化測試。</li>
+            <li>改善不同螢幕尺寸及鍵盤操作體驗。</li>
           </ul>
         </div>
       </div>
 
       <div class="card" style="margin-top:14px">
         <div class="card-title">開發順序建議</div>
-        <p>第一階段完成故事與遊戲流程；第二階段整理前端模組並加入本機完整存檔；第三階段再建置後端、資料庫與匿名玩家進度保存。</p>
+        <p>
+          第一階段完成故事內容與主要操作流程；第二階段整理前端程式模組；
+          第三階段加入完整的瀏覽器本機存檔與讀檔功能。
+          本專案不規劃後端伺服器、資料庫或雲端同步。
+        </p>
       </div>
     </section>
 
-    <!-- Slide 11 -->
+    <!-- Slide 11：參考資料 -->
     <section class="slide" data-index="11">
       <div class="slide-badge">附錄 :: REFERENCES</div>
       <h2 class="slide-title">參考資料與專案連結</h2>
@@ -744,23 +970,33 @@ PostgreSQL 資料庫
         <ul>
           <li>
             <strong>GitHub Repository：</strong>
-            <a href="https://github.com/bibest72-coder/Game_with_no_name_rn_XDD" target="_blank" rel="noopener noreferrer">
-              bibest72-coder/Game_with_no_name_rn_XDD
-            </a>
+            <a
+              href="https://github.com/bibest72-coder/Game_with_no_name_rn_XDD"
+              target="_blank"
+              rel="noopener noreferrer"
+            >bibest72-coder/Game_with_no_name_rn_XDD</a>
           </li>
           <li>
             <strong>GitHub Pages 遊戲展示：</strong>
-            <a href="https://bibest72-coder.github.io/Game_with_no_name_rn_XDD/" target="_blank" rel="noopener noreferrer">
-              bibest72.github.io/Game_with_no_name_rn_XDD
-            </a>
+            <a
+              href="https://bibest72-coder.github.io/Game_with_no_name_rn_XDD/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >bibest72-coder.github.io/Game_with_no_name_rn_XDD/</a>
           </li>
-          <li><strong>程式架構依據：</strong>專案目前的 React、TypeScript、Vite 程式與遊戲畫面。</li>
+          <li>
+            <strong>程式架構依據：</strong>
+            專案目前的 React、TypeScript、Vite 程式與遊戲畫面。
+          </li>
         </ul>
       </div>
 
       <div class="card" style="margin-top:14px">
         <div class="card-title">設計狀態聲明</div>
-        <p>本報告描述目前已實作的瀏覽器端功能，以及後端、資料庫與完整存檔等未來規劃。規劃內容不代表已完成或已部署。</p>
+        <p>
+          本報告描述目前已實作的瀏覽器端功能，以及完整存檔與讀檔等未來規劃。
+          Node.js 僅為開發與建置工具的執行環境；本專案不設置遊戲後端或資料庫。
+        </p>
       </div>
 
       <div style="margin-top:28px; text-align:center; color:var(--highlight-color); font-family:var(--font-mono); font-weight:800">
@@ -771,15 +1007,18 @@ PostgreSQL 資料庫
 
   <footer>
     <div>第九組專題報告</div>
-    <div class="progress-bar-container">
+
+    <div class="progress-bar-container" aria-label="簡報進度">
       <div class="progress-bar" id="progressBar"></div>
     </div>
+
     <div>導覽：[← 上一頁] [→ 下一頁]</div>
   </footer>
 
   <script>
     (() => {
       let currentSlide = 1;
+
       const slides = document.querySelectorAll(".slide");
       const totalSlides = slides.length;
       const pageNumber = document.getElementById("pageNumber");
@@ -807,15 +1046,18 @@ PostgreSQL 資料庫
         nextBtn.disabled = currentSlide === totalSlides;
       }
 
-      prevBtn.addEventListener("click", () => updateSlide(currentSlide - 1));
-      nextBtn.addEventListener("click", () => updateSlide(currentSlide + 1));
+      prevBtn.addEventListener("click", () => {
+        updateSlide(currentSlide - 1);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        updateSlide(currentSlide + 1);
+      });
 
       window.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowRight" || event.key === " ") {
-          event.preventDefault();
+        if (event.key === "ArrowRight") {
           updateSlide(currentSlide + 1);
         } else if (event.key === "ArrowLeft") {
-          event.preventDefault();
           updateSlide(currentSlide - 1);
         }
       });
